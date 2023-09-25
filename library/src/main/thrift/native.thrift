@@ -1,4 +1,4 @@
-namespace java com.theguardian.bridgetandroid.thrift
+namespace java com.theguardian.bridget.thrift
 
 struct Rect {
     1: required double x;

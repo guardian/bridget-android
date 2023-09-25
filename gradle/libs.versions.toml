@@ -12,12 +12,6 @@ javax-annotationApi = { group = "javax.annotation", name = "javax.annotation-api
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 apache-httpClient = { group = "org.apache.httpcomponents", name = "httpclient", version.ref = "httpclient" }
 
-# For thrift exclusion
-#commons-logging = { group = "commons-logging", name = "commons-logging" }
-#apache-tomcat-annotations = { group = "org.apache.tomcat", name = "tomcat-annotations-api" }
-#apache-tomcat-embed = { group = "org.apache.tomcat.embed", name = "tomcat-embed-core" }
-
-
 [plugins]
 kotlin-jvm = {id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
 

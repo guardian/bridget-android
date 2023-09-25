@@ -1,4 +1,4 @@
-namespace java com.theguardian.bridgetandroid
+namespace java com.theguardian.bridgetandroid.thrift
 
 struct Rect {
     1: required double x;
@@ -142,3 +142,5 @@ service Navigation {
 service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
+
+const string BRIDGET_VERSION = "2.0.0"

@@ -16,4 +16,3 @@ apache-httpClient = { group = "org.apache.httpcomponents", name = "httpclient", 
 kotlin-jvm = {id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
 
 [bundles]
-

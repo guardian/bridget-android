@@ -3,6 +3,8 @@ set -xe
 
 BRANCH_NAME=update-bridget-classes
 
+CURRENT_VERSION="$(git describe --tags --abbrev=0)"
+
 # Checkout app repo and create branch
 cd ..
 git clone https://github.com/guardian/android-news-app.git
@@ -15,7 +17,7 @@ mv -f ../bridget-android/library/build/libs/library.jar bridget/src/main/libs/br
 # Commit & push new bridget jar
 git config --global user.name "GuardianAndroid"
 git config --global user.email "guardian.android@gmail.com"
-git commit bridget/src/main/libs/bridget.jar -m "Update to bridget.jar"
+git commit bridget/src/main/libs/bridget.jar -m "Update to bridget version $CURRENT_VERSION"
 git push origin $BRANCH_NAME
 
 # Create PR with latest jar commit
@@ -24,4 +26,4 @@ curl \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/guardian/android-news-app/pulls \
   -u GuardianAndroid:$GUARDIANANDROID_PAT \
-  -d '{"head":"'$BRANCH_NAME'","base":"main", "title":"Pull request to update Bridget", "body":"The Bridget definitions have been updated. See [here](https://github.com/guardian/android-news-app/blob/main/bridget/README.md#how-to-update-bridget-version) how to review and merge this PR."}'
+  -d '{"head":"'$BRANCH_NAME'","base":"main", "title":"Update Bridget to version $CURRENT_VERSION", "body":"The Bridget models have been updated to version $CURRENT_VERSION. See [here](https://github.com/guardian/android-news-app/blob/main/bridget/README.md#how-to-update-bridget-version) how to review and merge this PR."}'

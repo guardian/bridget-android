@@ -1,5 +1,5 @@
-# Usage: `./update_bridget.sh
-set -xe
+#!/bin/bash -xe
+# Usage: `./create_bridget_pr.sh
 
 BRANCH_NAME=update-bridget-classes
 

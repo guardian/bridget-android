@@ -26,8 +26,15 @@ jobs:
     - name: Build jar
       run: |
         ./gradlew :library:build
-    
-    - name: Add jar to ANA
+
+    - name: Upload jar
+      uses: actions/upload-artifact@v3
+      with:
+        name: library-jar
+        path: |
+          library/build/libs/library.jar
+
+    - name: Add jar to android-news-app repo
       env:
         GUARDIANANDROID_PAT: ${{ secrets.GUARDIANANDROID_PAT }}
       run: |

@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     implementation(libs.apache.thrift)
     // Unlike the 0.15 release, the 0.17 gradle release of libthrift's POM file is missing

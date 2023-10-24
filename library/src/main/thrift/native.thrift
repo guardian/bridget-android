@@ -75,6 +75,7 @@ enum PurchaseScreenReason {
 
 service Environment {
     string nativeThriftPackageVersion()
+    bool isMyGuardianEnabled()
 }
 
 service Commercial {
@@ -86,6 +87,12 @@ service Acquisitions {
     void launchPurchaseScreen(1: PurchaseScreenReason reason),
     MaybeEpic getEpics(),
     void epicSeen()
+}
+
+service Tag {
+    bool follow(1:Topic topic),
+    bool unfollow(1:Topic topic),
+    bool isFollowing(1:Topic topic),
 }
 
 service Notifications {
@@ -142,5 +149,3 @@ service Navigation {
 service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
-
-const string BRIDGET_VERSION = "2.0.0"

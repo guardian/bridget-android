@@ -10,4 +10,5 @@ updates:
     schedule:
       interval: weekly
       day: sunday
-    reviewers: "guardian/android-developers"
+    reviewers: 
+      - "guardian/android-developers"

@@ -10,6 +10,7 @@ CURRENT_VERSION="$(git describe --tags --abbrev=0)"
 git config --global user.name "GuardianAndroid"
 git config --global user.password "$GUARDIANANDROID_PAT"
 git config --global user.email "guardian.android@gmail.com"
+git config --global credential.helper store
 
 # Checkout app repo and create branch
 cd ..

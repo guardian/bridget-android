@@ -6,8 +6,7 @@ BRANCH_NAME=update-bridget-classes
 CURRENT_VERSION="$(git describe --tags --abbrev=0)"
 
 # Commit & push new bridget jar
-git config --global credential.helper "/bin/bash ./credential-helper.sh"
-git config --global user.name "GuardianAndroid"
+git config --global credential.helper "/bin/bash ./scripts/credential-helper.sh"
 git config --global user.email "guardian.android@gmail.com"
 
 # Checkout app repo and create branch

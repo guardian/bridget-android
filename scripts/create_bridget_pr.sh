@@ -28,4 +28,4 @@ curl \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/guardian/android-news-app/pulls \
   -u GuardianAndroid:$GUARDIANANDROID_PAT \
-  -d '{"head":"'$BRANCH_NAME'","base":"main", "title":"Update Bridget to version $CURRENT_VERSION", "body":"The Bridget models have been updated to version $CURRENT_VERSION. See [here](https://github.com/guardian/android-news-app/blob/main/bridget/README.md#how-to-update-bridget-version) how to review and merge this PR."}'
+  -d '{"head":"'$BRANCH_NAME'","base":"main", "title":"Update Bridget to version '$CURRENT_VERSION'", "body":"The Bridget models have been updated to version '$CURRENT_VERSION'. See [here](https://github.com/guardian/android-news-app/blob/main/bridget/README.md#how-to-update-bridget-version) how to review and merge this PR."}'

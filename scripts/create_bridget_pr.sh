@@ -8,13 +8,11 @@ CURRENT_VERSION="$(git describe --tags --abbrev=0)"
 # Commit & push new bridget jar
 #git config --global credential.helper "/bin/bash ./credential-helper.sh"
 git config --global user.name "GuardianAndroid"
-git config --global user.password "$GUARDIANANDROID_PAT"
 git config --global user.email "guardian.android@gmail.com"
-git config --global credential.helper store
 
 # Checkout app repo and create branch
 cd ..
-git clone https://github.com/guardian/android-news-app.git
+git clone https://GuardianAndroid:$GUARDIANANDROID_PAT@github.com/guardian/android-news-app.git
 cd android-news-app
 git checkout -b $BRANCH_NAME
 

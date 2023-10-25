@@ -5,6 +5,11 @@ BRANCH_NAME=update-bridget-classes
 
 CURRENT_VERSION="$(git describe --tags --abbrev=0)"
 
+# Commit & push new bridget jar
+git config --global user.name "GuardianAndroid"
+git config --global user.email "guardian.android@gmail.com"
+git config --global credential.helper "/bin/bash ./scripts/credential-helper.sh"
+
 # Checkout app repo and create branch
 cd ..
 git clone https://github.com/guardian/android-news-app.git
@@ -13,11 +18,6 @@ git checkout -b $BRANCH_NAME
 
 # Copy jar
 mv -f ../bridget-android/library/build/libs/library.jar bridget/src/main/libs/bridget.jar
-
-# Commit & push new bridget jar
-git config --global user.name "GuardianAndroid"
-git config --global user.email "guardian.android@gmail.com"
-git config --global credential.helper "/bin/bash ./scripts/credential-helper.sh"
 
 git commit bridget/src/main/libs/bridget.jar -m "Update to bridget version $CURRENT_VERSION"
 git push origin $BRANCH_NAME

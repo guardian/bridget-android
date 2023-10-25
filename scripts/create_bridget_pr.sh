@@ -17,6 +17,8 @@ mv -f ../bridget-android/library/build/libs/library.jar bridget/src/main/libs/br
 # Commit & push new bridget jar
 git config --global user.name "GuardianAndroid"
 git config --global user.email "guardian.android@gmail.com"
+git config --global credential.helper "/bin/bash ./scripts/credential-helper.sh"
+
 git commit bridget/src/main/libs/bridget.jar -m "Update to bridget version $CURRENT_VERSION"
 git push origin $BRANCH_NAME
 

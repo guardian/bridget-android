@@ -149,5 +149,3 @@ service Navigation {
 service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
-
-const string BRIDGET_VERSION = "2.5.0"

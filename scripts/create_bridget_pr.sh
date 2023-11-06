@@ -1,9 +1,9 @@
 #!/bin/bash -xe
 # Usage: `./create_bridget_pr.sh
 
-BRANCH_NAME=update-bridget-classes
-
 CURRENT_VERSION="$(git describe --tags --abbrev=0)"
+
+BRANCH_NAME=update-bridget-classes-$CURRENT_VERSION
 
 # Commit & push new bridget jar
 #git config --global credential.helper "/bin/bash ./credential-helper.sh"

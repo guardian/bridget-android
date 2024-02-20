@@ -150,4 +150,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "2.5.0"
+const string BRIDGET_VERSION = "v0.0.0-2024-02-20-VERSION-2"

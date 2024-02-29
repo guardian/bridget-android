@@ -105,7 +105,9 @@ service User {
     bool isPremium(),
     list<string> filterSeenArticles(1:list<string> articleIds),
     string discussionId(),
-    bool doesCcpaApply()
+    bool doesCcpaApply(),
+    bool isSignedIn(),
+    void signIn(),
 }
 
 service Gallery {
@@ -150,4 +152,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "2.5.0"
+const string BRIDGET_VERSION = "v.0.0.0-2024-02-29-SNAPSHOT-USER-SIGN-IN"

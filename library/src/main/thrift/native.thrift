@@ -73,6 +73,24 @@ enum PurchaseScreenReason {
     epic = 1
 }
 
+enum SignInScreenReason {
+    saveForLater = 0,
+    postComment = 1,
+    recommendComment = 2,
+    replyToComment = 3,
+    reportComment = 4,
+    personaliseHome = 5,
+    profile = 6,
+    premiumTier = 7,
+    passwordChanged = 8,
+    meteredUser = 9,
+    signOrRegisterOnThankYou = 10,
+    followContributorTag = 11,
+    signInOnAdjustDeeplink = 12,
+    mandatorySignIn = 13,
+
+}
+
 service Environment {
     string nativeThriftPackageVersion()
     bool isMyGuardianEnabled()
@@ -105,7 +123,9 @@ service User {
     bool isPremium(),
     list<string> filterSeenArticles(1:list<string> articleIds),
     string discussionId(),
-    bool doesCcpaApply()
+    bool doesCcpaApply(),
+    bool isSignedIn(),
+    void signIn(1:SignInScreenReason reason),
 }
 
 service Gallery {
@@ -150,4 +170,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "2.5.0"
+const string BRIDGET_VERSION = "v0.0.0-2024-03-06-SNAPSHOT-SIGNIN"

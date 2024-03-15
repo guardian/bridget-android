@@ -1,13 +1,13 @@
 name: Create PR in android-news-app when bridget is updated
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
   build:
+    if: "!github.event.release.prerelease"
     name: Build and copy bridget.jar
     runs-on: 4core-ubuntu-latest
     timeout-minutes: 30

@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-    if: "!github.event.release.prerelease"
     name: Build and copy bridget.jar
     runs-on: 4core-ubuntu-latest
     timeout-minutes: 30

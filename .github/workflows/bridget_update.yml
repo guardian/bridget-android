@@ -2,10 +2,8 @@ name: Create PR in android-news-app when bridget is updated
 
 on:
   push:
-    branches:
-      - 'main'
-    paths:
-      - 'library/**'
+    tags:
+      - [1-9]+.*.*
   workflow_dispatch:
 
 jobs:

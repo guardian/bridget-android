@@ -61,13 +61,6 @@ union Metric {
     3: MetricFont font;
 }
 
-struct CommentResponse {
-    1: required string status;
-    2: required i32 statusCode;
-    3: required string message;
-    4: optional string errorCode;
-}
-
 enum PurchaseScreenReason {
     hideAds = 0,
     epic = 1
@@ -139,12 +132,24 @@ service Metrics {
     void sendMetrics(1:list<Metric> metrics)
 }
 
+struct DiscussionApiResponse {
+    1: required string status;
+    2: required i32 statusCode;
+    3: required string message;
+    4: optional string errorCode;
+}
+
+enum DiscussionNativeError {
+    UNKNOWN_ERROR = 0
+}
+
+union DiscussionResponse {
+    1: DiscussionApiResponse response;
+    2: DiscussionNativeError error;
+}
+
 service Discussion {
-    string preview(1:string body),
-    bool isDiscussionEnabled(),
-    bool recommend(1:i32 commentId),
-    CommentResponse comment(1:string shortUrl, 2:string body),
-    CommentResponse reply(1:string shortUrl, 2:string body, 3:i32 parentCommentId)
+    DiscussionResponse recommend(1:string commentId),
 }
 
 service Analytics {
@@ -168,4 +173,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "2.9.0"
+const string BRIDGET_VERSION = "v3.0.0"

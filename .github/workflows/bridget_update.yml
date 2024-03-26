@@ -3,7 +3,7 @@ name: Create PR in android-news-app when bridget is updated
 on:
   push:
     tags:
-      - "[1-9]+.*.*"
+      - "v[1-9]+.*.*"
   workflow_dispatch:
 
 jobs:

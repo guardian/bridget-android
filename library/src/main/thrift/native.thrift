@@ -116,7 +116,7 @@ service User {
     string discussionId(),
     bool doesCcpaApply(),
     bool isSignedIn(),
-    void signIn(1:SignInScreenReason reason, 2:SignInScreenReferrer referrer),
+    bool signIn(1:SignInScreenReason reason, 2:SignInScreenReferrer referrer),
 }
 
 service Gallery {
@@ -173,4 +173,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v3.0.0"
+const string BRIDGET_VERSION = "v4.0.0"

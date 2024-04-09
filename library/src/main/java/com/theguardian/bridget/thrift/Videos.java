@@ -737,14 +737,14 @@ public class Videos {
             case 1: // VIDEO_SLOTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list50 = iprot.readListBegin();
-                  struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list50.size);
-                  @org.apache.thrift.annotation.Nullable VideoSlot _elem51;
-                  for (int _i52 = 0; _i52 < _list50.size; ++_i52)
+                  org.apache.thrift.protocol.TList _list58 = iprot.readListBegin();
+                  struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list58.size);
+                  @org.apache.thrift.annotation.Nullable VideoSlot _elem59;
+                  for (int _i60 = 0; _i60 < _list58.size; ++_i60)
                   {
-                    _elem51 = new VideoSlot();
-                    _elem51.read(iprot);
-                    struct.videoSlots.add(_elem51);
+                    _elem59 = new VideoSlot();
+                    _elem59.read(iprot);
+                    struct.videoSlots.add(_elem59);
                   }
                   iprot.readListEnd();
                 }
@@ -773,9 +773,9 @@ public class Videos {
           oprot.writeFieldBegin(VIDEO_SLOTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.videoSlots.size()));
-            for (VideoSlot _iter53 : struct.videoSlots)
+            for (VideoSlot _iter61 : struct.videoSlots)
             {
-              _iter53.write(oprot);
+              _iter61.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -807,9 +807,9 @@ public class Videos {
         if (struct.isSetVideoSlots()) {
           {
             oprot.writeI32(struct.videoSlots.size());
-            for (VideoSlot _iter54 : struct.videoSlots)
+            for (VideoSlot _iter62 : struct.videoSlots)
             {
-              _iter54.write(oprot);
+              _iter62.write(oprot);
             }
           }
         }
@@ -821,14 +821,14 @@ public class Videos {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list55 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
-            struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list55.size);
-            @org.apache.thrift.annotation.Nullable VideoSlot _elem56;
-            for (int _i57 = 0; _i57 < _list55.size; ++_i57)
+            org.apache.thrift.protocol.TList _list63 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
+            struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list63.size);
+            @org.apache.thrift.annotation.Nullable VideoSlot _elem64;
+            for (int _i65 = 0; _i65 < _list63.size; ++_i65)
             {
-              _elem56 = new VideoSlot();
-              _elem56.read(iprot);
-              struct.videoSlots.add(_elem56);
+              _elem64 = new VideoSlot();
+              _elem64.read(iprot);
+              struct.videoSlots.add(_elem64);
             }
           }
           struct.setVideoSlotsIsSet(true);
@@ -1436,14 +1436,14 @@ public class Videos {
             case 1: // VIDEO_SLOTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list58 = iprot.readListBegin();
-                  struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list58.size);
-                  @org.apache.thrift.annotation.Nullable VideoSlot _elem59;
-                  for (int _i60 = 0; _i60 < _list58.size; ++_i60)
+                  org.apache.thrift.protocol.TList _list66 = iprot.readListBegin();
+                  struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list66.size);
+                  @org.apache.thrift.annotation.Nullable VideoSlot _elem67;
+                  for (int _i68 = 0; _i68 < _list66.size; ++_i68)
                   {
-                    _elem59 = new VideoSlot();
-                    _elem59.read(iprot);
-                    struct.videoSlots.add(_elem59);
+                    _elem67 = new VideoSlot();
+                    _elem67.read(iprot);
+                    struct.videoSlots.add(_elem67);
                   }
                   iprot.readListEnd();
                 }
@@ -1472,9 +1472,9 @@ public class Videos {
           oprot.writeFieldBegin(VIDEO_SLOTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.videoSlots.size()));
-            for (VideoSlot _iter61 : struct.videoSlots)
+            for (VideoSlot _iter69 : struct.videoSlots)
             {
-              _iter61.write(oprot);
+              _iter69.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -1506,9 +1506,9 @@ public class Videos {
         if (struct.isSetVideoSlots()) {
           {
             oprot.writeI32(struct.videoSlots.size());
-            for (VideoSlot _iter62 : struct.videoSlots)
+            for (VideoSlot _iter70 : struct.videoSlots)
             {
-              _iter62.write(oprot);
+              _iter70.write(oprot);
             }
           }
         }
@@ -1520,14 +1520,14 @@ public class Videos {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list63 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
-            struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list63.size);
-            @org.apache.thrift.annotation.Nullable VideoSlot _elem64;
-            for (int _i65 = 0; _i65 < _list63.size; ++_i65)
+            org.apache.thrift.protocol.TList _list71 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
+            struct.videoSlots = new java.util.ArrayList<VideoSlot>(_list71.size);
+            @org.apache.thrift.annotation.Nullable VideoSlot _elem72;
+            for (int _i73 = 0; _i73 < _list71.size; ++_i73)
             {
-              _elem64 = new VideoSlot();
-              _elem64.read(iprot);
-              struct.videoSlots.add(_elem64);
+              _elem72 = new VideoSlot();
+              _elem72.read(iprot);
+              struct.videoSlots.add(_elem72);
             }
           }
           struct.setVideoSlotsIsSet(true);

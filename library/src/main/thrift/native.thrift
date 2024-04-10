@@ -132,11 +132,40 @@ service Metrics {
     void sendMetrics(1:list<Metric> metrics)
 }
 
+struct DiscussionBadge {
+    1: required string name;
+}
+
+struct DiscussionUserProfile {
+    1: required string userId;
+    2: required string displayName;
+    3: required string webUrl;
+    4: required string apiUrl;
+    5: required string avatar;
+    6: required string secureAvatarUrl;
+    7: required list<DiscussionBadge> badge;
+    8: required bool canPostComment;
+    9: required bool isPremoderated;
+    10: required bool hasCommented;
+}
+
 struct DiscussionApiResponse {
     1: required string status;
     2: required i32 statusCode;
     3: required string message;
     4: optional string errorCode;
+}
+
+union GetUserProfileResponse {
+    1: DiscussionUserProfile profile;
+    2: DiscussionNativeError error;
+}
+
+struct ReportAbuseParameters {
+    1: string commentId;
+    2: string categoryId;
+    3: optional string reason;
+    4: optional string email;
 }
 
 enum DiscussionNativeError {
@@ -148,8 +177,28 @@ union DiscussionResponse {
     2: DiscussionNativeError error;
 }
 
+struct AddUsernameError {
+    1: string message;
+}
+
+struct AddUsernameApiResponse {
+    1: string status;
+    2: optional list<AddUsernameError> errors;
+}
+
+union AddUsernameResponse {
+    1: AddUsernameApiResponse response;
+    2: DiscussionNativeError error;
+}
+
 service Discussion {
     DiscussionResponse recommend(1:string commentId),
+    GetUserProfileResponse getUserProfile(),
+    DiscussionResponse comment(1:string shortUrl, 2:string body),
+    DiscussionResponse preview(1:string body),
+    DiscussionResponse reply(1:string shortUrl, 2:string body, 3:string parentCommentId),
+    AddUsernameResponse addUsername(1:string username),
+    DiscussionResponse reportAbuse(1:ReportAbuseParameters parameters)
 }
 
 service Analytics {
@@ -173,4 +222,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v4.0.0"
+const string BRIDGET_VERSION = "v0.0.0-2024-04-10-snapshot-2"

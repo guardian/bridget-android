@@ -2017,13 +2017,13 @@ public class User {
             case 1: // ARTICLE_IDS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list26 = iprot.readListBegin();
-                  struct.articleIds = new java.util.ArrayList<java.lang.String>(_list26.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem27;
-                  for (int _i28 = 0; _i28 < _list26.size; ++_i28)
+                  org.apache.thrift.protocol.TList _list34 = iprot.readListBegin();
+                  struct.articleIds = new java.util.ArrayList<java.lang.String>(_list34.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem35;
+                  for (int _i36 = 0; _i36 < _list34.size; ++_i36)
                   {
-                    _elem27 = iprot.readString();
-                    struct.articleIds.add(_elem27);
+                    _elem35 = iprot.readString();
+                    struct.articleIds.add(_elem35);
                   }
                   iprot.readListEnd();
                 }
@@ -2052,9 +2052,9 @@ public class User {
           oprot.writeFieldBegin(ARTICLE_IDS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.articleIds.size()));
-            for (java.lang.String _iter29 : struct.articleIds)
+            for (java.lang.String _iter37 : struct.articleIds)
             {
-              oprot.writeString(_iter29);
+              oprot.writeString(_iter37);
             }
             oprot.writeListEnd();
           }
@@ -2086,9 +2086,9 @@ public class User {
         if (struct.isSetArticleIds()) {
           {
             oprot.writeI32(struct.articleIds.size());
-            for (java.lang.String _iter30 : struct.articleIds)
+            for (java.lang.String _iter38 : struct.articleIds)
             {
-              oprot.writeString(_iter30);
+              oprot.writeString(_iter38);
             }
           }
         }
@@ -2100,13 +2100,13 @@ public class User {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list31 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRING);
-            struct.articleIds = new java.util.ArrayList<java.lang.String>(_list31.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem32;
-            for (int _i33 = 0; _i33 < _list31.size; ++_i33)
+            org.apache.thrift.protocol.TList _list39 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRING);
+            struct.articleIds = new java.util.ArrayList<java.lang.String>(_list39.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem40;
+            for (int _i41 = 0; _i41 < _list39.size; ++_i41)
             {
-              _elem32 = iprot.readString();
-              struct.articleIds.add(_elem32);
+              _elem40 = iprot.readString();
+              struct.articleIds.add(_elem40);
             }
           }
           struct.setArticleIdsIsSet(true);
@@ -2445,13 +2445,13 @@ public class User {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list34 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list34.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem35;
-                  for (int _i36 = 0; _i36 < _list34.size; ++_i36)
+                  org.apache.thrift.protocol.TList _list42 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list42.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem43;
+                  for (int _i44 = 0; _i44 < _list42.size; ++_i44)
                   {
-                    _elem35 = iprot.readString();
-                    struct.success.add(_elem35);
+                    _elem43 = iprot.readString();
+                    struct.success.add(_elem43);
                   }
                   iprot.readListEnd();
                 }
@@ -2480,9 +2480,9 @@ public class User {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter37 : struct.success)
+            for (java.lang.String _iter45 : struct.success)
             {
-              oprot.writeString(_iter37);
+              oprot.writeString(_iter45);
             }
             oprot.writeListEnd();
           }
@@ -2514,9 +2514,9 @@ public class User {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter38 : struct.success)
+            for (java.lang.String _iter46 : struct.success)
             {
-              oprot.writeString(_iter38);
+              oprot.writeString(_iter46);
             }
           }
         }
@@ -2528,13 +2528,13 @@ public class User {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list39 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRING);
-            struct.success = new java.util.ArrayList<java.lang.String>(_list39.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem40;
-            for (int _i41 = 0; _i41 < _list39.size; ++_i41)
+            org.apache.thrift.protocol.TList _list47 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRING);
+            struct.success = new java.util.ArrayList<java.lang.String>(_list47.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem48;
+            for (int _i49 = 0; _i49 < _list47.size; ++_i49)
             {
-              _elem40 = iprot.readString();
-              struct.success.add(_elem40);
+              _elem48 = iprot.readString();
+              struct.success.add(_elem48);
             }
           }
           struct.setSuccessIsSet(true);

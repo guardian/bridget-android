@@ -737,14 +737,14 @@ public class Commercial {
             case 1: // AD_SLOTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list10 = iprot.readListBegin();
-                  struct.adSlots = new java.util.ArrayList<AdSlot>(_list10.size);
-                  @org.apache.thrift.annotation.Nullable AdSlot _elem11;
-                  for (int _i12 = 0; _i12 < _list10.size; ++_i12)
+                  org.apache.thrift.protocol.TList _list26 = iprot.readListBegin();
+                  struct.adSlots = new java.util.ArrayList<AdSlot>(_list26.size);
+                  @org.apache.thrift.annotation.Nullable AdSlot _elem27;
+                  for (int _i28 = 0; _i28 < _list26.size; ++_i28)
                   {
-                    _elem11 = new AdSlot();
-                    _elem11.read(iprot);
-                    struct.adSlots.add(_elem11);
+                    _elem27 = new AdSlot();
+                    _elem27.read(iprot);
+                    struct.adSlots.add(_elem27);
                   }
                   iprot.readListEnd();
                 }
@@ -773,9 +773,9 @@ public class Commercial {
           oprot.writeFieldBegin(AD_SLOTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.adSlots.size()));
-            for (AdSlot _iter13 : struct.adSlots)
+            for (AdSlot _iter29 : struct.adSlots)
             {
-              _iter13.write(oprot);
+              _iter29.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -807,9 +807,9 @@ public class Commercial {
         if (struct.isSetAdSlots()) {
           {
             oprot.writeI32(struct.adSlots.size());
-            for (AdSlot _iter14 : struct.adSlots)
+            for (AdSlot _iter30 : struct.adSlots)
             {
-              _iter14.write(oprot);
+              _iter30.write(oprot);
             }
           }
         }
@@ -821,14 +821,14 @@ public class Commercial {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list15 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
-            struct.adSlots = new java.util.ArrayList<AdSlot>(_list15.size);
-            @org.apache.thrift.annotation.Nullable AdSlot _elem16;
-            for (int _i17 = 0; _i17 < _list15.size; ++_i17)
+            org.apache.thrift.protocol.TList _list31 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
+            struct.adSlots = new java.util.ArrayList<AdSlot>(_list31.size);
+            @org.apache.thrift.annotation.Nullable AdSlot _elem32;
+            for (int _i33 = 0; _i33 < _list31.size; ++_i33)
             {
-              _elem16 = new AdSlot();
-              _elem16.read(iprot);
-              struct.adSlots.add(_elem16);
+              _elem32 = new AdSlot();
+              _elem32.read(iprot);
+              struct.adSlots.add(_elem32);
             }
           }
           struct.setAdSlotsIsSet(true);
@@ -1436,14 +1436,14 @@ public class Commercial {
             case 1: // AD_SLOTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list18 = iprot.readListBegin();
-                  struct.adSlots = new java.util.ArrayList<AdSlot>(_list18.size);
-                  @org.apache.thrift.annotation.Nullable AdSlot _elem19;
-                  for (int _i20 = 0; _i20 < _list18.size; ++_i20)
+                  org.apache.thrift.protocol.TList _list34 = iprot.readListBegin();
+                  struct.adSlots = new java.util.ArrayList<AdSlot>(_list34.size);
+                  @org.apache.thrift.annotation.Nullable AdSlot _elem35;
+                  for (int _i36 = 0; _i36 < _list34.size; ++_i36)
                   {
-                    _elem19 = new AdSlot();
-                    _elem19.read(iprot);
-                    struct.adSlots.add(_elem19);
+                    _elem35 = new AdSlot();
+                    _elem35.read(iprot);
+                    struct.adSlots.add(_elem35);
                   }
                   iprot.readListEnd();
                 }
@@ -1472,9 +1472,9 @@ public class Commercial {
           oprot.writeFieldBegin(AD_SLOTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.adSlots.size()));
-            for (AdSlot _iter21 : struct.adSlots)
+            for (AdSlot _iter37 : struct.adSlots)
             {
-              _iter21.write(oprot);
+              _iter37.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -1506,9 +1506,9 @@ public class Commercial {
         if (struct.isSetAdSlots()) {
           {
             oprot.writeI32(struct.adSlots.size());
-            for (AdSlot _iter22 : struct.adSlots)
+            for (AdSlot _iter38 : struct.adSlots)
             {
-              _iter22.write(oprot);
+              _iter38.write(oprot);
             }
           }
         }
@@ -1520,14 +1520,14 @@ public class Commercial {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list23 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
-            struct.adSlots = new java.util.ArrayList<AdSlot>(_list23.size);
-            @org.apache.thrift.annotation.Nullable AdSlot _elem24;
-            for (int _i25 = 0; _i25 < _list23.size; ++_i25)
+            org.apache.thrift.protocol.TList _list39 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
+            struct.adSlots = new java.util.ArrayList<AdSlot>(_list39.size);
+            @org.apache.thrift.annotation.Nullable AdSlot _elem40;
+            for (int _i41 = 0; _i41 < _list39.size; ++_i41)
             {
-              _elem24 = new AdSlot();
-              _elem24.read(iprot);
-              struct.adSlots.add(_elem24);
+              _elem40 = new AdSlot();
+              _elem40.read(iprot);
+              struct.adSlots.add(_elem40);
             }
           }
           struct.setAdSlotsIsSet(true);

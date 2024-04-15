@@ -132,11 +132,33 @@ service Metrics {
     void sendMetrics(1:list<Metric> metrics)
 }
 
+struct DiscussionBadge {
+    1: required string name;
+}
+
+struct DiscussionUserProfile {
+    1: required string userId;
+    2: required string displayName;
+    3: required string webUrl;
+    4: required string apiUrl;
+    5: required string avatar;
+    6: required string secureAvatarUrl;
+    7: required list<DiscussionBadge> badge;
+    8: required bool canPostComment;
+    9: required bool isPremoderated;
+    10: required bool hasCommented;
+}
+
 struct DiscussionApiResponse {
     1: required string status;
     2: required i32 statusCode;
     3: required string message;
     4: optional string errorCode;
+}
+
+union GetUserProfileResponse {
+    1: DiscussionUserProfile profile;
+    2: DiscussionNativeError error;
 }
 
 enum DiscussionNativeError {
@@ -150,6 +172,9 @@ union DiscussionResponse {
 
 service Discussion {
     DiscussionResponse recommend(1:string commentId),
+    DiscussionResponse comment(1:string shortUrl, 2:string body),
+    DiscussionResponse reply(1:string shortUrl, 2:string body, 3:string parentCommentId),
+    GetUserProfileResponse getUserProfile(),
 }
 
 service Analytics {
@@ -173,4 +198,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v4.0.0"
+const string BRIDGET_VERSION = "v5.0.0"

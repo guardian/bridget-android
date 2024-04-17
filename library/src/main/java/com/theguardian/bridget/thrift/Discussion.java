@@ -12,25 +12,25 @@ public class Discussion {
 
   public interface Iface {
 
-    public DiscussionResponse recommend(java.lang.String commentId) throws org.apache.thrift.TException;
+    public DiscussionServiceResponse recommend(java.lang.String commentId) throws org.apache.thrift.TException;
 
-    public DiscussionResponse comment(java.lang.String shortUrl, java.lang.String body) throws org.apache.thrift.TException;
+    public DiscussionServiceResponse comment(java.lang.String shortUrl, java.lang.String body) throws org.apache.thrift.TException;
 
-    public DiscussionResponse reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId) throws org.apache.thrift.TException;
+    public DiscussionServiceResponse reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId) throws org.apache.thrift.TException;
 
-    public GetUserProfileResponse getUserProfile() throws org.apache.thrift.TException;
+    public DiscussionServiceResponse getUserProfile() throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void recommend(java.lang.String commentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException;
+    public void recommend(java.lang.String commentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException;
 
-    public void comment(java.lang.String shortUrl, java.lang.String body, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException;
+    public void comment(java.lang.String shortUrl, java.lang.String body, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException;
 
-    public void reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException;
+    public void reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException;
 
-    public void getUserProfile(org.apache.thrift.async.AsyncMethodCallback<GetUserProfileResponse> resultHandler) throws org.apache.thrift.TException;
+    public void getUserProfile(org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -57,7 +57,7 @@ public class Discussion {
     }
 
     @Override
-    public DiscussionResponse recommend(java.lang.String commentId) throws org.apache.thrift.TException
+    public DiscussionServiceResponse recommend(java.lang.String commentId) throws org.apache.thrift.TException
     {
       send_recommend(commentId);
       return recv_recommend();
@@ -70,7 +70,7 @@ public class Discussion {
       sendBase("recommend", args);
     }
 
-    public DiscussionResponse recv_recommend() throws org.apache.thrift.TException
+    public DiscussionServiceResponse recv_recommend() throws org.apache.thrift.TException
     {
       recommend_result result = new recommend_result();
       receiveBase(result, "recommend");
@@ -81,7 +81,7 @@ public class Discussion {
     }
 
     @Override
-    public DiscussionResponse comment(java.lang.String shortUrl, java.lang.String body) throws org.apache.thrift.TException
+    public DiscussionServiceResponse comment(java.lang.String shortUrl, java.lang.String body) throws org.apache.thrift.TException
     {
       send_comment(shortUrl, body);
       return recv_comment();
@@ -95,7 +95,7 @@ public class Discussion {
       sendBase("comment", args);
     }
 
-    public DiscussionResponse recv_comment() throws org.apache.thrift.TException
+    public DiscussionServiceResponse recv_comment() throws org.apache.thrift.TException
     {
       comment_result result = new comment_result();
       receiveBase(result, "comment");
@@ -106,7 +106,7 @@ public class Discussion {
     }
 
     @Override
-    public DiscussionResponse reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId) throws org.apache.thrift.TException
+    public DiscussionServiceResponse reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId) throws org.apache.thrift.TException
     {
       send_reply(shortUrl, body, parentCommentId);
       return recv_reply();
@@ -121,7 +121,7 @@ public class Discussion {
       sendBase("reply", args);
     }
 
-    public DiscussionResponse recv_reply() throws org.apache.thrift.TException
+    public DiscussionServiceResponse recv_reply() throws org.apache.thrift.TException
     {
       reply_result result = new reply_result();
       receiveBase(result, "reply");
@@ -132,7 +132,7 @@ public class Discussion {
     }
 
     @Override
-    public GetUserProfileResponse getUserProfile() throws org.apache.thrift.TException
+    public DiscussionServiceResponse getUserProfile() throws org.apache.thrift.TException
     {
       send_getUserProfile();
       return recv_getUserProfile();
@@ -144,7 +144,7 @@ public class Discussion {
       sendBase("getUserProfile", args);
     }
 
-    public GetUserProfileResponse recv_getUserProfile() throws org.apache.thrift.TException
+    public DiscussionServiceResponse recv_getUserProfile() throws org.apache.thrift.TException
     {
       getUserProfile_result result = new getUserProfile_result();
       receiveBase(result, "getUserProfile");
@@ -174,16 +174,16 @@ public class Discussion {
     }
 
     @Override
-    public void recommend(java.lang.String commentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException {
+    public void recommend(java.lang.String commentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       recommend_call method_call = new recommend_call(commentId, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class recommend_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionResponse> {
+    public static class recommend_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionServiceResponse> {
       private java.lang.String commentId;
-      public recommend_call(java.lang.String commentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public recommend_call(java.lang.String commentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.commentId = commentId;
       }
@@ -198,7 +198,7 @@ public class Discussion {
       }
 
       @Override
-      public DiscussionResponse getResult() throws org.apache.thrift.TException {
+      public DiscussionServiceResponse getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -209,17 +209,17 @@ public class Discussion {
     }
 
     @Override
-    public void comment(java.lang.String shortUrl, java.lang.String body, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException {
+    public void comment(java.lang.String shortUrl, java.lang.String body, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       comment_call method_call = new comment_call(shortUrl, body, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class comment_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionResponse> {
+    public static class comment_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionServiceResponse> {
       private java.lang.String shortUrl;
       private java.lang.String body;
-      public comment_call(java.lang.String shortUrl, java.lang.String body, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public comment_call(java.lang.String shortUrl, java.lang.String body, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.shortUrl = shortUrl;
         this.body = body;
@@ -236,7 +236,7 @@ public class Discussion {
       }
 
       @Override
-      public DiscussionResponse getResult() throws org.apache.thrift.TException {
+      public DiscussionServiceResponse getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -247,18 +247,18 @@ public class Discussion {
     }
 
     @Override
-    public void reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException {
+    public void reply(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       reply_call method_call = new reply_call(shortUrl, body, parentCommentId, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class reply_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionResponse> {
+    public static class reply_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionServiceResponse> {
       private java.lang.String shortUrl;
       private java.lang.String body;
       private java.lang.String parentCommentId;
-      public reply_call(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public reply_call(java.lang.String shortUrl, java.lang.String body, java.lang.String parentCommentId, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.shortUrl = shortUrl;
         this.body = body;
@@ -277,7 +277,7 @@ public class Discussion {
       }
 
       @Override
-      public DiscussionResponse getResult() throws org.apache.thrift.TException {
+      public DiscussionServiceResponse getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -288,15 +288,15 @@ public class Discussion {
     }
 
     @Override
-    public void getUserProfile(org.apache.thrift.async.AsyncMethodCallback<GetUserProfileResponse> resultHandler) throws org.apache.thrift.TException {
+    public void getUserProfile(org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       getUserProfile_call method_call = new getUserProfile_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getUserProfile_call extends org.apache.thrift.async.TAsyncMethodCall<GetUserProfileResponse> {
-      public getUserProfile_call(org.apache.thrift.async.AsyncMethodCallback<GetUserProfileResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class getUserProfile_call extends org.apache.thrift.async.TAsyncMethodCall<DiscussionServiceResponse> {
+      public getUserProfile_call(org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
@@ -309,7 +309,7 @@ public class Discussion {
       }
 
       @Override
-      public GetUserProfileResponse getResult() throws org.apache.thrift.TException {
+      public DiscussionServiceResponse getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -471,7 +471,7 @@ public class Discussion {
       return processMap;
     }
 
-    public static class recommend<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, recommend_args, DiscussionResponse> {
+    public static class recommend<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, recommend_args, DiscussionServiceResponse> {
       public recommend() {
         super("recommend");
       }
@@ -482,11 +482,11 @@ public class Discussion {
       }
 
       @Override
-      public org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse>() { 
+        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse>() { 
           @Override
-          public void onComplete(DiscussionResponse o) {
+          public void onComplete(DiscussionServiceResponse o) {
             recommend_result result = new recommend_result();
             result.success = o;
             try {
@@ -533,12 +533,12 @@ public class Discussion {
       }
 
       @Override
-      public void start(I iface, recommend_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, recommend_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
         iface.recommend(args.commentId,resultHandler);
       }
     }
 
-    public static class comment<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, comment_args, DiscussionResponse> {
+    public static class comment<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, comment_args, DiscussionServiceResponse> {
       public comment() {
         super("comment");
       }
@@ -549,11 +549,11 @@ public class Discussion {
       }
 
       @Override
-      public org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse>() { 
+        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse>() { 
           @Override
-          public void onComplete(DiscussionResponse o) {
+          public void onComplete(DiscussionServiceResponse o) {
             comment_result result = new comment_result();
             result.success = o;
             try {
@@ -600,12 +600,12 @@ public class Discussion {
       }
 
       @Override
-      public void start(I iface, comment_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, comment_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
         iface.comment(args.shortUrl, args.body,resultHandler);
       }
     }
 
-    public static class reply<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, reply_args, DiscussionResponse> {
+    public static class reply<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, reply_args, DiscussionServiceResponse> {
       public reply() {
         super("reply");
       }
@@ -616,11 +616,11 @@ public class Discussion {
       }
 
       @Override
-      public org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse>() { 
+        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse>() { 
           @Override
-          public void onComplete(DiscussionResponse o) {
+          public void onComplete(DiscussionServiceResponse o) {
             reply_result result = new reply_result();
             result.success = o;
             try {
@@ -667,12 +667,12 @@ public class Discussion {
       }
 
       @Override
-      public void start(I iface, reply_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionResponse> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, reply_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
         iface.reply(args.shortUrl, args.body, args.parentCommentId,resultHandler);
       }
     }
 
-    public static class getUserProfile<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getUserProfile_args, GetUserProfileResponse> {
+    public static class getUserProfile<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getUserProfile_args, DiscussionServiceResponse> {
       public getUserProfile() {
         super("getUserProfile");
       }
@@ -683,11 +683,11 @@ public class Discussion {
       }
 
       @Override
-      public org.apache.thrift.async.AsyncMethodCallback<GetUserProfileResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<GetUserProfileResponse>() { 
+        return new org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse>() { 
           @Override
-          public void onComplete(GetUserProfileResponse o) {
+          public void onComplete(DiscussionServiceResponse o) {
             getUserProfile_result result = new getUserProfile_result();
             result.success = o;
             try {
@@ -734,7 +734,7 @@ public class Discussion {
       }
 
       @Override
-      public void start(I iface, getUserProfile_args args, org.apache.thrift.async.AsyncMethodCallback<GetUserProfileResponse> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, getUserProfile_args args, org.apache.thrift.async.AsyncMethodCallback<DiscussionServiceResponse> resultHandler) throws org.apache.thrift.TException {
         iface.getUserProfile(resultHandler);
       }
     }
@@ -1129,7 +1129,7 @@ public class Discussion {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new recommend_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new recommend_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable DiscussionResponse success; // required
+    public @org.apache.thrift.annotation.Nullable DiscussionServiceResponse success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -1198,7 +1198,7 @@ public class Discussion {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionResponse.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionServiceResponse.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(recommend_result.class, metaDataMap);
     }
@@ -1207,7 +1207,7 @@ public class Discussion {
     }
 
     public recommend_result(
-      DiscussionResponse success)
+      DiscussionServiceResponse success)
     {
       this();
       this.success = success;
@@ -1218,7 +1218,7 @@ public class Discussion {
      */
     public recommend_result(recommend_result other) {
       if (other.isSetSuccess()) {
-        this.success = new DiscussionResponse(other.success);
+        this.success = new DiscussionServiceResponse(other.success);
       }
     }
 
@@ -1233,11 +1233,11 @@ public class Discussion {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public DiscussionResponse getSuccess() {
+    public DiscussionServiceResponse getSuccess() {
       return this.success;
     }
 
-    public recommend_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionResponse success) {
+    public recommend_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionServiceResponse success) {
       this.success = success;
       return this;
     }
@@ -1264,7 +1264,7 @@ public class Discussion {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((DiscussionResponse)value);
+          setSuccess((DiscussionServiceResponse)value);
         }
         break;
 
@@ -1427,7 +1427,7 @@ public class Discussion {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new DiscussionResponse();
+                struct.success = new DiscussionServiceResponse();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -1488,7 +1488,7 @@ public class Discussion {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new DiscussionResponse();
+          struct.success = new DiscussionServiceResponse();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -1993,7 +1993,7 @@ public class Discussion {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new comment_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new comment_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable DiscussionResponse success; // required
+    public @org.apache.thrift.annotation.Nullable DiscussionServiceResponse success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -2062,7 +2062,7 @@ public class Discussion {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionResponse.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionServiceResponse.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(comment_result.class, metaDataMap);
     }
@@ -2071,7 +2071,7 @@ public class Discussion {
     }
 
     public comment_result(
-      DiscussionResponse success)
+      DiscussionServiceResponse success)
     {
       this();
       this.success = success;
@@ -2082,7 +2082,7 @@ public class Discussion {
      */
     public comment_result(comment_result other) {
       if (other.isSetSuccess()) {
-        this.success = new DiscussionResponse(other.success);
+        this.success = new DiscussionServiceResponse(other.success);
       }
     }
 
@@ -2097,11 +2097,11 @@ public class Discussion {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public DiscussionResponse getSuccess() {
+    public DiscussionServiceResponse getSuccess() {
       return this.success;
     }
 
-    public comment_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionResponse success) {
+    public comment_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionServiceResponse success) {
       this.success = success;
       return this;
     }
@@ -2128,7 +2128,7 @@ public class Discussion {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((DiscussionResponse)value);
+          setSuccess((DiscussionServiceResponse)value);
         }
         break;
 
@@ -2291,7 +2291,7 @@ public class Discussion {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new DiscussionResponse();
+                struct.success = new DiscussionServiceResponse();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -2352,7 +2352,7 @@ public class Discussion {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new DiscussionResponse();
+          struct.success = new DiscussionServiceResponse();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -2962,7 +2962,7 @@ public class Discussion {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new reply_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new reply_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable DiscussionResponse success; // required
+    public @org.apache.thrift.annotation.Nullable DiscussionServiceResponse success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -3031,7 +3031,7 @@ public class Discussion {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionResponse.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionServiceResponse.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(reply_result.class, metaDataMap);
     }
@@ -3040,7 +3040,7 @@ public class Discussion {
     }
 
     public reply_result(
-      DiscussionResponse success)
+      DiscussionServiceResponse success)
     {
       this();
       this.success = success;
@@ -3051,7 +3051,7 @@ public class Discussion {
      */
     public reply_result(reply_result other) {
       if (other.isSetSuccess()) {
-        this.success = new DiscussionResponse(other.success);
+        this.success = new DiscussionServiceResponse(other.success);
       }
     }
 
@@ -3066,11 +3066,11 @@ public class Discussion {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public DiscussionResponse getSuccess() {
+    public DiscussionServiceResponse getSuccess() {
       return this.success;
     }
 
-    public reply_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionResponse success) {
+    public reply_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionServiceResponse success) {
       this.success = success;
       return this;
     }
@@ -3097,7 +3097,7 @@ public class Discussion {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((DiscussionResponse)value);
+          setSuccess((DiscussionServiceResponse)value);
         }
         break;
 
@@ -3260,7 +3260,7 @@ public class Discussion {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new DiscussionResponse();
+                struct.success = new DiscussionServiceResponse();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -3321,7 +3321,7 @@ public class Discussion {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new DiscussionResponse();
+          struct.success = new DiscussionServiceResponse();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -3608,7 +3608,7 @@ public class Discussion {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getUserProfile_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getUserProfile_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable GetUserProfileResponse success; // required
+    public @org.apache.thrift.annotation.Nullable DiscussionServiceResponse success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -3677,7 +3677,7 @@ public class Discussion {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GetUserProfileResponse.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, DiscussionServiceResponse.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getUserProfile_result.class, metaDataMap);
     }
@@ -3686,7 +3686,7 @@ public class Discussion {
     }
 
     public getUserProfile_result(
-      GetUserProfileResponse success)
+      DiscussionServiceResponse success)
     {
       this();
       this.success = success;
@@ -3697,7 +3697,7 @@ public class Discussion {
      */
     public getUserProfile_result(getUserProfile_result other) {
       if (other.isSetSuccess()) {
-        this.success = new GetUserProfileResponse(other.success);
+        this.success = new DiscussionServiceResponse(other.success);
       }
     }
 
@@ -3712,11 +3712,11 @@ public class Discussion {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public GetUserProfileResponse getSuccess() {
+    public DiscussionServiceResponse getSuccess() {
       return this.success;
     }
 
-    public getUserProfile_result setSuccess(@org.apache.thrift.annotation.Nullable GetUserProfileResponse success) {
+    public getUserProfile_result setSuccess(@org.apache.thrift.annotation.Nullable DiscussionServiceResponse success) {
       this.success = success;
       return this;
     }
@@ -3743,7 +3743,7 @@ public class Discussion {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((GetUserProfileResponse)value);
+          setSuccess((DiscussionServiceResponse)value);
         }
         break;
 
@@ -3906,7 +3906,7 @@ public class Discussion {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new GetUserProfileResponse();
+                struct.success = new DiscussionServiceResponse();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -3967,7 +3967,7 @@ public class Discussion {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new GetUserProfileResponse();
+          struct.success = new DiscussionServiceResponse();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }

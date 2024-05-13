@@ -22,7 +22,7 @@ public class User {
 
     public boolean isSignedIn() throws org.apache.thrift.TException;
 
-    public void signIn(SignInScreenReason reason, SignInScreenReferrer referrer) throws org.apache.thrift.TException;
+    public boolean signIn(SignInScreenReason reason, SignInScreenReferrer referrer) throws org.apache.thrift.TException;
 
   }
 
@@ -38,7 +38,7 @@ public class User {
 
     public void isSignedIn(org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
 
-    public void signIn(SignInScreenReason reason, SignInScreenReferrer referrer, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+    public void signIn(SignInScreenReason reason, SignInScreenReferrer referrer, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -181,10 +181,10 @@ public class User {
     }
 
     @Override
-    public void signIn(SignInScreenReason reason, SignInScreenReferrer referrer) throws org.apache.thrift.TException
+    public boolean signIn(SignInScreenReason reason, SignInScreenReferrer referrer) throws org.apache.thrift.TException
     {
       send_signIn(reason, referrer);
-      recv_signIn();
+      return recv_signIn();
     }
 
     public void send_signIn(SignInScreenReason reason, SignInScreenReferrer referrer) throws org.apache.thrift.TException
@@ -195,11 +195,14 @@ public class User {
       sendBase("signIn", args);
     }
 
-    public void recv_signIn() throws org.apache.thrift.TException
+    public boolean recv_signIn() throws org.apache.thrift.TException
     {
       signIn_result result = new signIn_result();
       receiveBase(result, "signIn");
-      return;
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "signIn failed: unknown result");
     }
 
   }
@@ -385,17 +388,17 @@ public class User {
     }
 
     @Override
-    public void signIn(SignInScreenReason reason, SignInScreenReferrer referrer, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+    public void signIn(SignInScreenReason reason, SignInScreenReferrer referrer, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       signIn_call method_call = new signIn_call(reason, referrer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class signIn_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+    public static class signIn_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.Boolean> {
       private SignInScreenReason reason;
       private SignInScreenReferrer referrer;
-      public signIn_call(SignInScreenReason reason, SignInScreenReferrer referrer, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public signIn_call(SignInScreenReason reason, SignInScreenReferrer referrer, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.reason = reason;
         this.referrer = referrer;
@@ -412,14 +415,13 @@ public class User {
       }
 
       @Override
-      public Void getResult() throws org.apache.thrift.TException {
+      public java.lang.Boolean getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_signIn();
-        return null;
+        return (new Client(prot)).recv_signIn();
       }
     }
 
@@ -611,7 +613,8 @@ public class User {
       @Override
       public signIn_result getResult(I iface, signIn_args args) throws org.apache.thrift.TException {
         signIn_result result = new signIn_result();
-        iface.signIn(args.reason, args.referrer);
+        result.success = iface.signIn(args.reason, args.referrer);
+        result.setSuccessIsSet(true);
         return result;
       }
     }
@@ -976,7 +979,7 @@ public class User {
       }
     }
 
-    public static class signIn<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, signIn_args, Void> {
+    public static class signIn<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, signIn_args, java.lang.Boolean> {
       public signIn() {
         super("signIn");
       }
@@ -987,12 +990,14 @@ public class User {
       }
 
       @Override
-      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean>() { 
           @Override
-          public void onComplete(Void o) {
+          public void onComplete(java.lang.Boolean o) {
             signIn_result result = new signIn_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
             } catch (org.apache.thrift.transport.TTransportException e) {
@@ -1037,7 +1042,7 @@ public class User {
       }
 
       @Override
-      public void start(I iface, signIn_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, signIn_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
         iface.signIn(args.reason, args.referrer,resultHandler);
       }
     }
@@ -4988,14 +4993,16 @@ public class User {
   public static class signIn_result implements org.apache.thrift.TBase<signIn_result, signIn_result._Fields>, java.io.Serializable, Cloneable, Comparable<signIn_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("signIn_result");
 
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new signIn_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new signIn_resultTupleSchemeFactory();
 
+    public boolean success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      SUCCESS((short)0, "success");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -5011,6 +5018,8 @@ public class User {
       @org.apache.thrift.annotation.Nullable
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
           default:
             return null;
         }
@@ -5052,9 +5061,15 @@ public class User {
         return _fieldName;
       }
     }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(signIn_result.class, metaDataMap);
     }
@@ -5062,10 +5077,20 @@ public class User {
     public signIn_result() {
     }
 
+    public signIn_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public signIn_result(signIn_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
     }
 
     @Override
@@ -5075,11 +5100,44 @@ public class User {
 
     @Override
     public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public signIn_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
     }
 
     @Override
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((java.lang.Boolean)value);
+        }
+        break;
+
       }
     }
 
@@ -5087,6 +5145,9 @@ public class User {
     @Override
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case SUCCESS:
+        return isSuccess();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -5099,6 +5160,8 @@ public class User {
       }
 
       switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -5116,12 +5179,23 @@ public class User {
       if (this == that)
         return true;
 
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
       return true;
     }
 
     @Override
     public int hashCode() {
       int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((success) ? 131071 : 524287);
 
       return hashCode;
     }
@@ -5134,6 +5208,16 @@ public class User {
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.compare(isSetSuccess(), other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -5157,6 +5241,9 @@ public class User {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("signIn_result(");
       boolean first = true;
 
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -5176,6 +5263,8 @@ public class User {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -5202,6 +5291,14 @@ public class User {
             break;
           }
           switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -5218,6 +5315,11 @@ public class User {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -5236,11 +5338,24 @@ public class User {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, signIn_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, signIn_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
       }
     }
 

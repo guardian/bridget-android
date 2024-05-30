@@ -61,16 +61,25 @@ union Metric {
     3: MetricFont font;
 }
 
-struct CommentResponse {
-    1: required string status;
-    2: required i32 statusCode;
-    3: required string message;
-    4: optional string errorCode;
-}
-
 enum PurchaseScreenReason {
     hideAds = 0,
     epic = 1
+}
+
+enum SignInScreenReason {
+    accessDiscussion = 0
+    postComment = 1,
+    recommendComment = 2,
+    replyToComment = 3,
+    reportComment = 4
+}
+
+enum SignInScreenReferrer {
+    accessDiscussion = 0
+    postComment = 1,
+    recommendComment = 2,
+    replyToComment = 3,
+    reportComment = 4
 }
 
 service Environment {
@@ -105,7 +114,9 @@ service User {
     bool isPremium(),
     list<string> filterSeenArticles(1:list<string> articleIds),
     string discussionId(),
-    bool doesCcpaApply()
+    bool doesCcpaApply(),
+    bool isSignedIn(),
+    bool signIn(1:SignInScreenReason reason, 2:SignInScreenReferrer referrer),
 }
 
 service Gallery {
@@ -121,12 +132,21 @@ service Metrics {
     void sendMetrics(1:list<Metric> metrics)
 }
 
+enum DiscussionNativeError {
+    UNKNOWN_ERROR = 0
+}
+
+union DiscussionServiceResponse {
+    /** the JSON parsing will be done in DCR */
+    1: string response;
+    2: DiscussionNativeError error;
+}
+
 service Discussion {
-    string preview(1:string body),
-    bool isDiscussionEnabled(),
-    bool recommend(1:i32 commentId),
-    CommentResponse comment(1:string shortUrl, 2:string body),
-    CommentResponse reply(1:string shortUrl, 2:string body, 3:i32 parentCommentId)
+    DiscussionServiceResponse recommend(1:string commentId),
+    DiscussionServiceResponse comment(1:string shortUrl, 2:string body),
+    DiscussionServiceResponse reply(1:string shortUrl, 2:string body, 3:string parentCommentId),
+    DiscussionServiceResponse getUserProfile(),
 }
 
 service Analytics {
@@ -150,4 +170,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "2.8.1"
+const string BRIDGET_VERSION = "v6.0.0"

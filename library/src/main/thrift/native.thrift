@@ -61,6 +61,21 @@ union Metric {
     3: MetricFont font;
 }
 
+enum MediaEvent {
+    request = 0,
+    ready = 1,
+    play = 2,
+    percent25 = 3,
+    percent50 = 4,
+    percent75 = 5,
+    end = 6
+}
+
+struct VideoEvent {
+    1: required string videoId;
+    2: required MediaEvent event;
+}
+
 enum PurchaseScreenReason {
     hideAds = 0,
     epic = 1
@@ -125,7 +140,9 @@ service Gallery {
 
 service Videos {
     void insertVideos(1:list<VideoSlot> videoSlots),
-    void updateVideos(1:list<VideoSlot> videoSlots)
+    void updateVideos(1:list<VideoSlot> videoSlots),
+    void sendVideoEvent(1:VideoEvent videoEvent),
+    void fullscreen(),
 }
 
 service Metrics {
@@ -142,6 +159,7 @@ union DiscussionServiceResponse {
     2: DiscussionNativeError error;
 }
 
+/** only available for signed in user, see https://github.com/guardian/bridget/issues/149 */
 service Discussion {
     DiscussionServiceResponse recommend(1:string commentId),
     DiscussionServiceResponse comment(1:string shortUrl, 2:string body),
@@ -163,11 +181,11 @@ service Navigation {
  * added  version 2.0.0
  * methods:
  *  - requestSignUp: request to sign up to a newsletter using an email address entered by the user.
- * Returns `true` if the request was successful, `false` if it failed for any reason. Exceptions 
+ * Returns `true` if the request was successful, `false` if it failed for any reason. Exceptions
  * thrown will be discarded.
  */
 service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v6.0.0"
+const string BRIDGET_VERSION = "v0.0.0-2024-08-15-snapshot-1"

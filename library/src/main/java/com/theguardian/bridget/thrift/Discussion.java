@@ -10,6 +10,9 @@ package com.theguardian.bridget.thrift;
 @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
 public class Discussion {
 
+  /**
+   * only available for signed in user, see https://github.com/guardian/bridget/issues/149
+   */
   public interface Iface {
 
     public DiscussionServiceResponse recommend(java.lang.String commentId) throws org.apache.thrift.TException;

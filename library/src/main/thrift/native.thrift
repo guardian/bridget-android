@@ -144,7 +144,9 @@ service Videos {
     void updateVideos(1:list<VideoSlot> videoSlots),
     void sendVideoEvent(1:VideoEvent videoEvent),
     /** Android only */
-    void fullscreen(),
+    void setFullscreen(1:bool isFullscreen),
+    /** Android requires the web layer to resize and style the player for fullscreen */
+    bool webFullscreen(),
 }
 
 service Metrics {
@@ -190,4 +192,4 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v7.0.0"
+const string BRIDGET_VERSION = "v0.0.0-2024-09-26-snapshot-1"

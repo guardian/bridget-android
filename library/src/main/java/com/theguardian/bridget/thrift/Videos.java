@@ -19,9 +19,18 @@ public class Videos {
     public void sendVideoEvent(VideoEvent videoEvent) throws org.apache.thrift.TException;
 
     /**
-     * Android only
+     * This method is used by the web layer to instruct the native layer to activate or deactivate fullscreen mode
+     * This is currently only required for Android as the fullscreen control on the YouTube player in Android webviews is a no-op
+     * 
+     * @param isFullscreen true if the web layer is fullscreen, false otherwise
+     * @returns true if the native operation was successful, false otherwise
+     * 
+     * On Android, this method will return true if the operation was successful, false otherwise
+     * On iOS, this method will always return false
+     * 
+     * @param isFullscreen
      */
-    public void fullscreen() throws org.apache.thrift.TException;
+    public boolean setFullscreen(boolean isFullscreen) throws org.apache.thrift.TException;
 
   }
 
@@ -33,7 +42,7 @@ public class Videos {
 
     public void sendVideoEvent(VideoEvent videoEvent, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
-    public void fullscreen(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+    public void setFullscreen(boolean isFullscreen, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -123,23 +132,27 @@ public class Videos {
     }
 
     @Override
-    public void fullscreen() throws org.apache.thrift.TException
+    public boolean setFullscreen(boolean isFullscreen) throws org.apache.thrift.TException
     {
-      send_fullscreen();
-      recv_fullscreen();
+      send_setFullscreen(isFullscreen);
+      return recv_setFullscreen();
     }
 
-    public void send_fullscreen() throws org.apache.thrift.TException
+    public void send_setFullscreen(boolean isFullscreen) throws org.apache.thrift.TException
     {
-      fullscreen_args args = new fullscreen_args();
-      sendBase("fullscreen", args);
+      setFullscreen_args args = new setFullscreen_args();
+      args.setIsFullscreen(isFullscreen);
+      sendBase("setFullscreen", args);
     }
 
-    public void recv_fullscreen() throws org.apache.thrift.TException
+    public boolean recv_setFullscreen() throws org.apache.thrift.TException
     {
-      fullscreen_result result = new fullscreen_result();
-      receiveBase(result, "fullscreen");
-      return;
+      setFullscreen_result result = new setFullscreen_result();
+      receiveBase(result, "setFullscreen");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "setFullscreen failed: unknown result");
     }
 
   }
@@ -270,35 +283,37 @@ public class Videos {
     }
 
     @Override
-    public void fullscreen(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+    public void setFullscreen(boolean isFullscreen, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      fullscreen_call method_call = new fullscreen_call(resultHandler, this, ___protocolFactory, ___transport);
+      setFullscreen_call method_call = new setFullscreen_call(isFullscreen, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class fullscreen_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
-      public fullscreen_call(org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class setFullscreen_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.Boolean> {
+      private boolean isFullscreen;
+      public setFullscreen_call(boolean isFullscreen, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.isFullscreen = isFullscreen;
       }
 
       @Override
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("fullscreen", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        fullscreen_args args = new fullscreen_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setFullscreen", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setFullscreen_args args = new setFullscreen_args();
+        args.setIsFullscreen(isFullscreen);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
       @Override
-      public Void getResult() throws org.apache.thrift.TException {
+      public java.lang.Boolean getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_fullscreen();
-        return null;
+        return (new Client(prot)).recv_setFullscreen();
       }
     }
 
@@ -318,7 +333,7 @@ public class Videos {
       processMap.put("insertVideos", new insertVideos());
       processMap.put("updateVideos", new updateVideos());
       processMap.put("sendVideoEvent", new sendVideoEvent());
-      processMap.put("fullscreen", new fullscreen());
+      processMap.put("setFullscreen", new setFullscreen());
       return processMap;
     }
 
@@ -406,14 +421,14 @@ public class Videos {
       }
     }
 
-    public static class fullscreen<I extends Iface> extends org.apache.thrift.ProcessFunction<I, fullscreen_args> {
-      public fullscreen() {
-        super("fullscreen");
+    public static class setFullscreen<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setFullscreen_args> {
+      public setFullscreen() {
+        super("setFullscreen");
       }
 
       @Override
-      public fullscreen_args getEmptyArgsInstance() {
-        return new fullscreen_args();
+      public setFullscreen_args getEmptyArgsInstance() {
+        return new setFullscreen_args();
       }
 
       @Override
@@ -427,9 +442,10 @@ public class Videos {
       }
 
       @Override
-      public fullscreen_result getResult(I iface, fullscreen_args args) throws org.apache.thrift.TException {
-        fullscreen_result result = new fullscreen_result();
-        iface.fullscreen();
+      public setFullscreen_result getResult(I iface, setFullscreen_args args) throws org.apache.thrift.TException {
+        setFullscreen_result result = new setFullscreen_result();
+        result.success = iface.setFullscreen(args.isFullscreen);
+        result.setSuccessIsSet(true);
         return result;
       }
     }
@@ -450,7 +466,7 @@ public class Videos {
       processMap.put("insertVideos", new insertVideos());
       processMap.put("updateVideos", new updateVideos());
       processMap.put("sendVideoEvent", new sendVideoEvent());
-      processMap.put("fullscreen", new fullscreen());
+      processMap.put("setFullscreen", new setFullscreen());
       return processMap;
     }
 
@@ -652,23 +668,25 @@ public class Videos {
       }
     }
 
-    public static class fullscreen<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, fullscreen_args, Void> {
-      public fullscreen() {
-        super("fullscreen");
+    public static class setFullscreen<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setFullscreen_args, java.lang.Boolean> {
+      public setFullscreen() {
+        super("setFullscreen");
       }
 
       @Override
-      public fullscreen_args getEmptyArgsInstance() {
-        return new fullscreen_args();
+      public setFullscreen_args getEmptyArgsInstance() {
+        return new setFullscreen_args();
       }
 
       @Override
-      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean>() { 
           @Override
-          public void onComplete(Void o) {
-            fullscreen_result result = new fullscreen_result();
+          public void onComplete(java.lang.Boolean o) {
+            setFullscreen_result result = new setFullscreen_result();
+            result.success = o;
+            result.setSuccessIsSet(true);
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
             } catch (org.apache.thrift.transport.TTransportException e) {
@@ -683,7 +701,7 @@ public class Videos {
           public void onError(java.lang.Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
-            fullscreen_result result = new fullscreen_result();
+            setFullscreen_result result = new setFullscreen_result();
             if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
@@ -713,8 +731,8 @@ public class Videos {
       }
 
       @Override
-      public void start(I iface, fullscreen_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-        iface.fullscreen(resultHandler);
+      public void start(I iface, setFullscreen_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
+        iface.setFullscreen(args.isFullscreen,resultHandler);
       }
     }
 
@@ -2768,17 +2786,19 @@ public class Videos {
   }
 
   @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
-  public static class fullscreen_args implements org.apache.thrift.TBase<fullscreen_args, fullscreen_args._Fields>, java.io.Serializable, Cloneable, Comparable<fullscreen_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("fullscreen_args");
+  public static class setFullscreen_args implements org.apache.thrift.TBase<setFullscreen_args, setFullscreen_args._Fields>, java.io.Serializable, Cloneable, Comparable<setFullscreen_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setFullscreen_args");
 
+    private static final org.apache.thrift.protocol.TField IS_FULLSCREEN_FIELD_DESC = new org.apache.thrift.protocol.TField("isFullscreen", org.apache.thrift.protocol.TType.BOOL, (short)1);
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new fullscreen_argsStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new fullscreen_argsTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setFullscreen_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setFullscreen_argsTupleSchemeFactory();
 
+    public boolean isFullscreen; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      IS_FULLSCREEN((short)1, "isFullscreen");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -2794,6 +2814,8 @@ public class Videos {
       @org.apache.thrift.annotation.Nullable
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // IS_FULLSCREEN
+            return IS_FULLSCREEN;
           default:
             return null;
         }
@@ -2835,34 +2857,83 @@ public class Videos {
         return _fieldName;
       }
     }
+
+    // isset id assignments
+    private static final int __ISFULLSCREEN_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.IS_FULLSCREEN, new org.apache.thrift.meta_data.FieldMetaData("isFullscreen", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(fullscreen_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setFullscreen_args.class, metaDataMap);
     }
 
-    public fullscreen_args() {
+    public setFullscreen_args() {
+    }
+
+    public setFullscreen_args(
+      boolean isFullscreen)
+    {
+      this();
+      this.isFullscreen = isFullscreen;
+      setIsFullscreenIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public fullscreen_args(fullscreen_args other) {
+    public setFullscreen_args(setFullscreen_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.isFullscreen = other.isFullscreen;
     }
 
     @Override
-    public fullscreen_args deepCopy() {
-      return new fullscreen_args(this);
+    public setFullscreen_args deepCopy() {
+      return new setFullscreen_args(this);
     }
 
     @Override
     public void clear() {
+      setIsFullscreenIsSet(false);
+      this.isFullscreen = false;
+    }
+
+    public boolean isIsFullscreen() {
+      return this.isFullscreen;
+    }
+
+    public setFullscreen_args setIsFullscreen(boolean isFullscreen) {
+      this.isFullscreen = isFullscreen;
+      setIsFullscreenIsSet(true);
+      return this;
+    }
+
+    public void unsetIsFullscreen() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __ISFULLSCREEN_ISSET_ID);
+    }
+
+    /** Returns true if field isFullscreen is set (has been assigned a value) and false otherwise */
+    public boolean isSetIsFullscreen() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __ISFULLSCREEN_ISSET_ID);
+    }
+
+    public void setIsFullscreenIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ISFULLSCREEN_ISSET_ID, value);
     }
 
     @Override
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
+      case IS_FULLSCREEN:
+        if (value == null) {
+          unsetIsFullscreen();
+        } else {
+          setIsFullscreen((java.lang.Boolean)value);
+        }
+        break;
+
       }
     }
 
@@ -2870,6 +2941,9 @@ public class Videos {
     @Override
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case IS_FULLSCREEN:
+        return isIsFullscreen();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -2882,22 +2956,33 @@ public class Videos {
       }
 
       switch (field) {
+      case IS_FULLSCREEN:
+        return isSetIsFullscreen();
       }
       throw new java.lang.IllegalStateException();
     }
 
     @Override
     public boolean equals(java.lang.Object that) {
-      if (that instanceof fullscreen_args)
-        return this.equals((fullscreen_args)that);
+      if (that instanceof setFullscreen_args)
+        return this.equals((setFullscreen_args)that);
       return false;
     }
 
-    public boolean equals(fullscreen_args that) {
+    public boolean equals(setFullscreen_args that) {
       if (that == null)
         return false;
       if (this == that)
         return true;
+
+      boolean this_present_isFullscreen = true;
+      boolean that_present_isFullscreen = true;
+      if (this_present_isFullscreen || that_present_isFullscreen) {
+        if (!(this_present_isFullscreen && that_present_isFullscreen))
+          return false;
+        if (this.isFullscreen != that.isFullscreen)
+          return false;
+      }
 
       return true;
     }
@@ -2906,17 +2991,29 @@ public class Videos {
     public int hashCode() {
       int hashCode = 1;
 
+      hashCode = hashCode * 8191 + ((isFullscreen) ? 131071 : 524287);
+
       return hashCode;
     }
 
     @Override
-    public int compareTo(fullscreen_args other) {
+    public int compareTo(setFullscreen_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.compare(isSetIsFullscreen(), other.isSetIsFullscreen());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetIsFullscreen()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.isFullscreen, other.isFullscreen);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -2938,9 +3035,12 @@ public class Videos {
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("fullscreen_args(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("setFullscreen_args(");
       boolean first = true;
 
+      sb.append("isFullscreen:");
+      sb.append(this.isFullscreen);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -2960,23 +3060,25 @@ public class Videos {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
       }
     }
 
-    private static class fullscreen_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+    private static class setFullscreen_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
       @Override
-      public fullscreen_argsStandardScheme getScheme() {
-        return new fullscreen_argsStandardScheme();
+      public setFullscreen_argsStandardScheme getScheme() {
+        return new setFullscreen_argsStandardScheme();
       }
     }
 
-    private static class fullscreen_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<fullscreen_args> {
+    private static class setFullscreen_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<setFullscreen_args> {
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol iprot, fullscreen_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setFullscreen_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2986,6 +3088,14 @@ public class Videos {
             break;
           }
           switch (schemeField.id) {
+            case 1: // IS_FULLSCREEN
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.isFullscreen = iprot.readBool();
+                struct.setIsFullscreenIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -2998,33 +3108,49 @@ public class Videos {
       }
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol oprot, fullscreen_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setFullscreen_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldBegin(IS_FULLSCREEN_FIELD_DESC);
+        oprot.writeBool(struct.isFullscreen);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
 
     }
 
-    private static class fullscreen_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+    private static class setFullscreen_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
       @Override
-      public fullscreen_argsTupleScheme getScheme() {
-        return new fullscreen_argsTupleScheme();
+      public setFullscreen_argsTupleScheme getScheme() {
+        return new setFullscreen_argsTupleScheme();
       }
     }
 
-    private static class fullscreen_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<fullscreen_args> {
+    private static class setFullscreen_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<setFullscreen_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, fullscreen_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, setFullscreen_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetIsFullscreen()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetIsFullscreen()) {
+          oprot.writeBool(struct.isFullscreen);
+        }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, fullscreen_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, setFullscreen_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.isFullscreen = iprot.readBool();
+          struct.setIsFullscreenIsSet(true);
+        }
       }
     }
 
@@ -3034,17 +3160,19 @@ public class Videos {
   }
 
   @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
-  public static class fullscreen_result implements org.apache.thrift.TBase<fullscreen_result, fullscreen_result._Fields>, java.io.Serializable, Cloneable, Comparable<fullscreen_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("fullscreen_result");
+  public static class setFullscreen_result implements org.apache.thrift.TBase<setFullscreen_result, setFullscreen_result._Fields>, java.io.Serializable, Cloneable, Comparable<setFullscreen_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setFullscreen_result");
 
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new fullscreen_resultStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new fullscreen_resultTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new setFullscreen_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new setFullscreen_resultTupleSchemeFactory();
 
+    public boolean success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      SUCCESS((short)0, "success");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -3060,6 +3188,8 @@ public class Videos {
       @org.apache.thrift.annotation.Nullable
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
           default:
             return null;
         }
@@ -3101,34 +3231,83 @@ public class Videos {
         return _fieldName;
       }
     }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(fullscreen_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setFullscreen_result.class, metaDataMap);
     }
 
-    public fullscreen_result() {
+    public setFullscreen_result() {
+    }
+
+    public setFullscreen_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public fullscreen_result(fullscreen_result other) {
+    public setFullscreen_result(setFullscreen_result other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.success = other.success;
     }
 
     @Override
-    public fullscreen_result deepCopy() {
-      return new fullscreen_result(this);
+    public setFullscreen_result deepCopy() {
+      return new setFullscreen_result(this);
     }
 
     @Override
     public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public setFullscreen_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
     }
 
     @Override
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((java.lang.Boolean)value);
+        }
+        break;
+
       }
     }
 
@@ -3136,6 +3315,9 @@ public class Videos {
     @Override
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case SUCCESS:
+        return isSuccess();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3148,22 +3330,33 @@ public class Videos {
       }
 
       switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
       }
       throw new java.lang.IllegalStateException();
     }
 
     @Override
     public boolean equals(java.lang.Object that) {
-      if (that instanceof fullscreen_result)
-        return this.equals((fullscreen_result)that);
+      if (that instanceof setFullscreen_result)
+        return this.equals((setFullscreen_result)that);
       return false;
     }
 
-    public boolean equals(fullscreen_result that) {
+    public boolean equals(setFullscreen_result that) {
       if (that == null)
         return false;
       if (this == that)
         return true;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
 
       return true;
     }
@@ -3172,17 +3365,29 @@ public class Videos {
     public int hashCode() {
       int hashCode = 1;
 
+      hashCode = hashCode * 8191 + ((success) ? 131071 : 524287);
+
       return hashCode;
     }
 
     @Override
-    public int compareTo(fullscreen_result other) {
+    public int compareTo(setFullscreen_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.compare(isSetSuccess(), other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -3203,9 +3408,12 @@ public class Videos {
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("fullscreen_result(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("setFullscreen_result(");
       boolean first = true;
 
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -3225,23 +3433,25 @@ public class Videos {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
       }
     }
 
-    private static class fullscreen_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+    private static class setFullscreen_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
       @Override
-      public fullscreen_resultStandardScheme getScheme() {
-        return new fullscreen_resultStandardScheme();
+      public setFullscreen_resultStandardScheme getScheme() {
+        return new setFullscreen_resultStandardScheme();
       }
     }
 
-    private static class fullscreen_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<fullscreen_result> {
+    private static class setFullscreen_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<setFullscreen_result> {
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol iprot, fullscreen_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setFullscreen_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3251,6 +3461,14 @@ public class Videos {
             break;
           }
           switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.success = iprot.readBool();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -3263,33 +3481,51 @@ public class Videos {
       }
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol oprot, fullscreen_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setFullscreen_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.isSetSuccess()) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeBool(struct.success);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
 
     }
 
-    private static class fullscreen_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+    private static class setFullscreen_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
       @Override
-      public fullscreen_resultTupleScheme getScheme() {
-        return new fullscreen_resultTupleScheme();
+      public setFullscreen_resultTupleScheme getScheme() {
+        return new setFullscreen_resultTupleScheme();
       }
     }
 
-    private static class fullscreen_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<fullscreen_result> {
+    private static class setFullscreen_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<setFullscreen_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, fullscreen_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, setFullscreen_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          oprot.writeBool(struct.success);
+        }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, fullscreen_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, setFullscreen_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = iprot.readBool();
+          struct.setSuccessIsSet(true);
+        }
       }
     }
 

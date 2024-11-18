@@ -199,4 +199,13 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v8.0.0"
+service Touch {
+    /**
+     * Notify the native layer that the user has started or stopped touching.
+     *
+     * @param isTouching true if the user has started touching, false otherwise
+     */
+    void setIsTouching(1:bool isTouching)
+}
+
+const string BRIDGET_VERSION = "v0.0.0-2024-11-18-snapshot-1"

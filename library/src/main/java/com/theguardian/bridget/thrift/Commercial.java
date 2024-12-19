@@ -16,6 +16,8 @@ public class Commercial {
 
     public void updateAdverts(java.util.List<AdSlot> adSlots) throws org.apache.thrift.TException;
 
+    public void sendTargetingParams(java.util.Map<java.lang.String,java.lang.String> targetingParams) throws org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
@@ -23,6 +25,8 @@ public class Commercial {
     public void insertAdverts(java.util.List<AdSlot> adSlots, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void updateAdverts(java.util.List<AdSlot> adSlots, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+
+    public void sendTargetingParams(java.util.Map<java.lang.String,java.lang.String> targetingParams, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -87,6 +91,27 @@ public class Commercial {
     {
       updateAdverts_result result = new updateAdverts_result();
       receiveBase(result, "updateAdverts");
+      return;
+    }
+
+    @Override
+    public void sendTargetingParams(java.util.Map<java.lang.String,java.lang.String> targetingParams) throws org.apache.thrift.TException
+    {
+      send_sendTargetingParams(targetingParams);
+      recv_sendTargetingParams();
+    }
+
+    public void send_sendTargetingParams(java.util.Map<java.lang.String,java.lang.String> targetingParams) throws org.apache.thrift.TException
+    {
+      sendTargetingParams_args args = new sendTargetingParams_args();
+      args.setTargetingParams(targetingParams);
+      sendBase("sendTargetingParams", args);
+    }
+
+    public void recv_sendTargetingParams() throws org.apache.thrift.TException
+    {
+      sendTargetingParams_result result = new sendTargetingParams_result();
+      receiveBase(result, "sendTargetingParams");
       return;
     }
 
@@ -181,6 +206,42 @@ public class Commercial {
       }
     }
 
+    @Override
+    public void sendTargetingParams(java.util.Map<java.lang.String,java.lang.String> targetingParams, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      sendTargetingParams_call method_call = new sendTargetingParams_call(targetingParams, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class sendTargetingParams_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private java.util.Map<java.lang.String,java.lang.String> targetingParams;
+      public sendTargetingParams_call(java.util.Map<java.lang.String,java.lang.String> targetingParams, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.targetingParams = targetingParams;
+      }
+
+      @Override
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendTargetingParams", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        sendTargetingParams_args args = new sendTargetingParams_args();
+        args.setTargetingParams(targetingParams);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      @Override
+      public Void getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_sendTargetingParams();
+        return null;
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -196,6 +257,7 @@ public class Commercial {
     private static <I extends Iface> java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends org.apache.thrift.TBase, ? extends org.apache.thrift.TBase>> getProcessMap(java.util.Map<java.lang.String, org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase, ? extends org.apache.thrift.TBase>> processMap) {
       processMap.put("insertAdverts", new insertAdverts());
       processMap.put("updateAdverts", new updateAdverts());
+      processMap.put("sendTargetingParams", new sendTargetingParams());
       return processMap;
     }
 
@@ -265,6 +327,39 @@ public class Commercial {
       }
     }
 
+    public static class sendTargetingParams<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendTargetingParams_args, sendTargetingParams_result> {
+      public sendTargetingParams() {
+        super("sendTargetingParams");
+      }
+
+      @Override
+      public sendTargetingParams_args getEmptyArgsInstance() {
+        return new sendTargetingParams_args();
+      }
+
+      @Override
+      public boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean rethrowUnhandledExceptions() {
+        return false;
+      }
+
+      @Override
+      public sendTargetingParams_result getEmptyResultInstance() {
+        return new sendTargetingParams_result();
+      }
+
+      @Override
+      public sendTargetingParams_result getResult(I iface, sendTargetingParams_args args) throws org.apache.thrift.TException {
+        sendTargetingParams_result result = getEmptyResultInstance();
+        iface.sendTargetingParams(args.targetingParams);
+        return result;
+      }
+    }
+
   }
 
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
@@ -280,6 +375,7 @@ public class Commercial {
     private static <I extends AsyncIface> java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?, ? extends org.apache.thrift.TBase>> getProcessMap(java.util.Map<java.lang.String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?, ? extends org.apache.thrift.TBase>> processMap) {
       processMap.put("insertAdverts", new insertAdverts());
       processMap.put("updateAdverts", new updateAdverts());
+      processMap.put("sendTargetingParams", new sendTargetingParams());
       return processMap;
     }
 
@@ -422,6 +518,77 @@ public class Commercial {
       @Override
       public void start(I iface, updateAdverts_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
         iface.updateAdverts(args.adSlots,resultHandler);
+      }
+    }
+
+    public static class sendTargetingParams<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, sendTargetingParams_args, Void, sendTargetingParams_result> {
+      public sendTargetingParams() {
+        super("sendTargetingParams");
+      }
+
+      @Override
+      public sendTargetingParams_result getEmptyResultInstance() {
+        return new sendTargetingParams_result();
+      }
+
+      @Override
+      public sendTargetingParams_args getEmptyArgsInstance() {
+        return new sendTargetingParams_args();
+      }
+
+      @Override
+      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+          @Override
+          public void onComplete(Void o) {
+            sendTargetingParams_result result = new sendTargetingParams_result();
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          @Override
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            sendTargetingParams_result result = new sendTargetingParams_result();
+            if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      @Override
+      public boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      public void start(I iface, sendTargetingParams_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.sendTargetingParams(args.targetingParams,resultHandler);
       }
     }
 
@@ -1816,6 +1983,702 @@ public class Commercial {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, updateAdverts_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
+  public static class sendTargetingParams_args implements org.apache.thrift.TBase<sendTargetingParams_args, sendTargetingParams_args._Fields>, java.io.Serializable, Cloneable, Comparable<sendTargetingParams_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendTargetingParams_args");
+
+    private static final org.apache.thrift.protocol.TField TARGETING_PARAMS_FIELD_DESC = new org.apache.thrift.protocol.TField("targetingParams", org.apache.thrift.protocol.TType.MAP, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new sendTargetingParams_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new sendTargetingParams_argsTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.lang.String> targetingParams; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TARGETING_PARAMS((short)1, "targetingParams");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TARGETING_PARAMS
+            return TARGETING_PARAMS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      @Override
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      @Override
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.TARGETING_PARAMS, new org.apache.thrift.meta_data.FieldMetaData("targetingParams", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendTargetingParams_args.class, metaDataMap);
+    }
+
+    public sendTargetingParams_args() {
+    }
+
+    public sendTargetingParams_args(
+      java.util.Map<java.lang.String,java.lang.String> targetingParams)
+    {
+      this();
+      this.targetingParams = targetingParams;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public sendTargetingParams_args(sendTargetingParams_args other) {
+      if (other.isSetTargetingParams()) {
+        java.util.Map<java.lang.String,java.lang.String> __this__targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(other.targetingParams);
+        this.targetingParams = __this__targetingParams;
+      }
+    }
+
+    @Override
+    public sendTargetingParams_args deepCopy() {
+      return new sendTargetingParams_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.targetingParams = null;
+    }
+
+    public int getTargetingParamsSize() {
+      return (this.targetingParams == null) ? 0 : this.targetingParams.size();
+    }
+
+    public void putToTargetingParams(java.lang.String key, java.lang.String val) {
+      if (this.targetingParams == null) {
+        this.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>();
+      }
+      this.targetingParams.put(key, val);
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.util.Map<java.lang.String,java.lang.String> getTargetingParams() {
+      return this.targetingParams;
+    }
+
+    public sendTargetingParams_args setTargetingParams(@org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.lang.String> targetingParams) {
+      this.targetingParams = targetingParams;
+      return this;
+    }
+
+    public void unsetTargetingParams() {
+      this.targetingParams = null;
+    }
+
+    /** Returns true if field targetingParams is set (has been assigned a value) and false otherwise */
+    public boolean isSetTargetingParams() {
+      return this.targetingParams != null;
+    }
+
+    public void setTargetingParamsIsSet(boolean value) {
+      if (!value) {
+        this.targetingParams = null;
+      }
+    }
+
+    @Override
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case TARGETING_PARAMS:
+        if (value == null) {
+          unsetTargetingParams();
+        } else {
+          setTargetingParams((java.util.Map<java.lang.String,java.lang.String>)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case TARGETING_PARAMS:
+        return getTargetingParams();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    @Override
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case TARGETING_PARAMS:
+        return isSetTargetingParams();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that instanceof sendTargetingParams_args)
+        return this.equals((sendTargetingParams_args)that);
+      return false;
+    }
+
+    public boolean equals(sendTargetingParams_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_targetingParams = true && this.isSetTargetingParams();
+      boolean that_present_targetingParams = true && that.isSetTargetingParams();
+      if (this_present_targetingParams || that_present_targetingParams) {
+        if (!(this_present_targetingParams && that_present_targetingParams))
+          return false;
+        if (!this.targetingParams.equals(that.targetingParams))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetTargetingParams()) ? 131071 : 524287);
+      if (isSetTargetingParams())
+        hashCode = hashCode * 8191 + targetingParams.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(sendTargetingParams_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.compare(isSetTargetingParams(), other.isSetTargetingParams());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTargetingParams()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.targetingParams, other.targetingParams);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    @Override
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    @Override
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("sendTargetingParams_args(");
+      boolean first = true;
+
+      sb.append("targetingParams:");
+      if (this.targetingParams == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.targetingParams);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class sendTargetingParams_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendTargetingParams_argsStandardScheme getScheme() {
+        return new sendTargetingParams_argsStandardScheme();
+      }
+    }
+
+    private static class sendTargetingParams_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<sendTargetingParams_args> {
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol iprot, sendTargetingParams_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // TARGETING_PARAMS
+              if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+                {
+                  org.apache.thrift.protocol.TMap _map26 = iprot.readMapBegin();
+                  struct.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map26.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key27;
+                  @org.apache.thrift.annotation.Nullable java.lang.String _val28;
+                  for (int _i29 = 0; _i29 < _map26.size; ++_i29)
+                  {
+                    _key27 = iprot.readString();
+                    _val28 = iprot.readString();
+                    struct.targetingParams.put(_key27, _val28);
+                  }
+                  iprot.readMapEnd();
+                }
+                struct.setTargetingParamsIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol oprot, sendTargetingParams_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.targetingParams != null) {
+          oprot.writeFieldBegin(TARGETING_PARAMS_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.targetingParams.size()));
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter30 : struct.targetingParams.entrySet())
+            {
+              oprot.writeString(_iter30.getKey());
+              oprot.writeString(_iter30.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class sendTargetingParams_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendTargetingParams_argsTupleScheme getScheme() {
+        return new sendTargetingParams_argsTupleScheme();
+      }
+    }
+
+    private static class sendTargetingParams_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<sendTargetingParams_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, sendTargetingParams_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetTargetingParams()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetTargetingParams()) {
+          {
+            oprot.writeI32(struct.targetingParams.size());
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter31 : struct.targetingParams.entrySet())
+            {
+              oprot.writeString(_iter31.getKey());
+              oprot.writeString(_iter31.getValue());
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, sendTargetingParams_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          {
+            org.apache.thrift.protocol.TMap _map32 = iprot.readMapBegin(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING); 
+            struct.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map32.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key33;
+            @org.apache.thrift.annotation.Nullable java.lang.String _val34;
+            for (int _i35 = 0; _i35 < _map32.size; ++_i35)
+            {
+              _key33 = iprot.readString();
+              _val34 = iprot.readString();
+              struct.targetingParams.put(_key33, _val34);
+            }
+          }
+          struct.setTargetingParamsIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
+  public static class sendTargetingParams_result implements org.apache.thrift.TBase<sendTargetingParams_result, sendTargetingParams_result._Fields>, java.io.Serializable, Cloneable, Comparable<sendTargetingParams_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendTargetingParams_result");
+
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new sendTargetingParams_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new sendTargetingParams_resultTupleSchemeFactory();
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      @Override
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      @Override
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendTargetingParams_result.class, metaDataMap);
+    }
+
+    public sendTargetingParams_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public sendTargetingParams_result(sendTargetingParams_result other) {
+    }
+
+    @Override
+    public sendTargetingParams_result deepCopy() {
+      return new sendTargetingParams_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    @Override
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    @Override
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that instanceof sendTargetingParams_result)
+        return this.equals((sendTargetingParams_result)that);
+      return false;
+    }
+
+    public boolean equals(sendTargetingParams_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(sendTargetingParams_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    @Override
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("sendTargetingParams_result(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class sendTargetingParams_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendTargetingParams_resultStandardScheme getScheme() {
+        return new sendTargetingParams_resultStandardScheme();
+      }
+    }
+
+    private static class sendTargetingParams_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<sendTargetingParams_result> {
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol iprot, sendTargetingParams_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol oprot, sendTargetingParams_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class sendTargetingParams_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendTargetingParams_resultTupleScheme getScheme() {
+        return new sendTargetingParams_resultTupleScheme();
+      }
+    }
+
+    private static class sendTargetingParams_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<sendTargetingParams_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, sendTargetingParams_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, sendTargetingParams_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       }
     }

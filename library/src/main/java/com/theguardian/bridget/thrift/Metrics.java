@@ -590,14 +590,14 @@ public class Metrics {
             case 1: // METRICS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list66 = iprot.readListBegin();
-                  struct.metrics = new java.util.ArrayList<Metric>(_list66.size);
-                  @org.apache.thrift.annotation.Nullable Metric _elem67;
-                  for (int _i68 = 0; _i68 < _list66.size; ++_i68)
+                  org.apache.thrift.protocol.TList _list76 = iprot.readListBegin();
+                  struct.metrics = new java.util.ArrayList<Metric>(_list76.size);
+                  @org.apache.thrift.annotation.Nullable Metric _elem77;
+                  for (int _i78 = 0; _i78 < _list76.size; ++_i78)
                   {
-                    _elem67 = new Metric();
-                    _elem67.read(iprot);
-                    struct.metrics.add(_elem67);
+                    _elem77 = new Metric();
+                    _elem77.read(iprot);
+                    struct.metrics.add(_elem77);
                   }
                   iprot.readListEnd();
                 }
@@ -626,9 +626,9 @@ public class Metrics {
           oprot.writeFieldBegin(METRICS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.metrics.size()));
-            for (Metric _iter69 : struct.metrics)
+            for (Metric _iter79 : struct.metrics)
             {
-              _iter69.write(oprot);
+              _iter79.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -660,9 +660,9 @@ public class Metrics {
         if (struct.isSetMetrics()) {
           {
             oprot.writeI32(struct.metrics.size());
-            for (Metric _iter70 : struct.metrics)
+            for (Metric _iter80 : struct.metrics)
             {
-              _iter70.write(oprot);
+              _iter80.write(oprot);
             }
           }
         }
@@ -674,14 +674,14 @@ public class Metrics {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list71 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
-            struct.metrics = new java.util.ArrayList<Metric>(_list71.size);
-            @org.apache.thrift.annotation.Nullable Metric _elem72;
-            for (int _i73 = 0; _i73 < _list71.size; ++_i73)
+            org.apache.thrift.protocol.TList _list81 = iprot.readListBegin(org.apache.thrift.protocol.TType.STRUCT);
+            struct.metrics = new java.util.ArrayList<Metric>(_list81.size);
+            @org.apache.thrift.annotation.Nullable Metric _elem82;
+            for (int _i83 = 0; _i83 < _list81.size; ++_i83)
             {
-              _elem72 = new Metric();
-              _elem72.read(iprot);
-              struct.metrics.add(_elem72);
+              _elem82 = new Metric();
+              _elem82.read(iprot);
+              struct.metrics.add(_elem82);
             }
           }
           struct.setMetricsIsSet(true);

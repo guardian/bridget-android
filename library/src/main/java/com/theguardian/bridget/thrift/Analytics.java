@@ -583,15 +583,15 @@ public class Analytics {
             case 1: // TARGETING_PARAMS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map74 = iprot.readMapBegin();
-                  struct.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map74.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _key75;
-                  @org.apache.thrift.annotation.Nullable java.lang.String _val76;
-                  for (int _i77 = 0; _i77 < _map74.size; ++_i77)
+                  org.apache.thrift.protocol.TMap _map84 = iprot.readMapBegin();
+                  struct.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map84.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key85;
+                  @org.apache.thrift.annotation.Nullable java.lang.String _val86;
+                  for (int _i87 = 0; _i87 < _map84.size; ++_i87)
                   {
-                    _key75 = iprot.readString();
-                    _val76 = iprot.readString();
-                    struct.targetingParams.put(_key75, _val76);
+                    _key85 = iprot.readString();
+                    _val86 = iprot.readString();
+                    struct.targetingParams.put(_key85, _val86);
                   }
                   iprot.readMapEnd();
                 }
@@ -620,10 +620,10 @@ public class Analytics {
           oprot.writeFieldBegin(TARGETING_PARAMS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.targetingParams.size()));
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter78 : struct.targetingParams.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter88 : struct.targetingParams.entrySet())
             {
-              oprot.writeString(_iter78.getKey());
-              oprot.writeString(_iter78.getValue());
+              oprot.writeString(_iter88.getKey());
+              oprot.writeString(_iter88.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -655,10 +655,10 @@ public class Analytics {
         if (struct.isSetTargetingParams()) {
           {
             oprot.writeI32(struct.targetingParams.size());
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter79 : struct.targetingParams.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter89 : struct.targetingParams.entrySet())
             {
-              oprot.writeString(_iter79.getKey());
-              oprot.writeString(_iter79.getValue());
+              oprot.writeString(_iter89.getKey());
+              oprot.writeString(_iter89.getValue());
             }
           }
         }
@@ -670,15 +670,15 @@ public class Analytics {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map80 = iprot.readMapBegin(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING); 
-            struct.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map80.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _key81;
-            @org.apache.thrift.annotation.Nullable java.lang.String _val82;
-            for (int _i83 = 0; _i83 < _map80.size; ++_i83)
+            org.apache.thrift.protocol.TMap _map90 = iprot.readMapBegin(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING); 
+            struct.targetingParams = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map90.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key91;
+            @org.apache.thrift.annotation.Nullable java.lang.String _val92;
+            for (int _i93 = 0; _i93 < _map90.size; ++_i93)
             {
-              _key81 = iprot.readString();
-              _val82 = iprot.readString();
-              struct.targetingParams.put(_key81, _val82);
+              _key91 = iprot.readString();
+              _val92 = iprot.readString();
+              struct.targetingParams.put(_key91, _val92);
             }
           }
           struct.setTargetingParamsIsSet(true);

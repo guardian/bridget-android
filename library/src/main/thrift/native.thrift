@@ -105,7 +105,8 @@ service Environment {
 
 service Commercial {
     void insertAdverts(1:list<AdSlot> adSlots),
-    void updateAdverts(1:list<AdSlot> adSlots)
+    void updateAdverts(1:list<AdSlot> adSlots),
+    void sendTargetingParams(1:map<string, string> targetingParams)    
 }
 
 service Acquisitions {
@@ -208,4 +209,4 @@ service Interaction {
     void disableArticleSwipe(1:bool disableSwipe)
 }
 
-const string BRIDGET_VERSION = "v8.2.0"
+const string BRIDGET_VERSION = "v8.3.0"

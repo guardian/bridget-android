@@ -105,7 +105,8 @@ service Environment {
 
 service Commercial {
     void insertAdverts(1:list<AdSlot> adSlots),
-    void updateAdverts(1:list<AdSlot> adSlots)
+    void updateAdverts(1:list<AdSlot> adSlots),
+    void sendTargetingParams(1:map<string, string> targetingParams)    
 }
 
 service Acquisitions {
@@ -143,8 +144,17 @@ service Videos {
     void insertVideos(1:list<VideoSlot> videoSlots),
     void updateVideos(1:list<VideoSlot> videoSlots),
     void sendVideoEvent(1:VideoEvent videoEvent),
-    /** Android only */
-    void fullscreen(),
+    /**
+     * This method is used by the web layer to instruct the native layer to activate or deactivate fullscreen mode
+     * This is currently only required for Android as the fullscreen control on the YouTube player in Android webviews is a no-op
+     *
+     * @param isFullscreen true if the web layer is fullscreen, false otherwise
+     * @returns true if the native operation was successful, false otherwise
+     *
+     * On Android, this method will return true if the operation was successful, false otherwise
+     * On iOS, this method will always return false
+     */
+    bool setFullscreen(1:bool isFullscreen),
 }
 
 service Metrics {
@@ -190,4 +200,13 @@ service Newsletters {
     bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
 }
 
-const string BRIDGET_VERSION = "v7.0.0"
+service Interaction {
+    /**
+     * Notify the native layer to disable the article swipe feature.
+     *
+     * @param disableSwipe true if native needs to disable article swipe
+     */
+    void disableArticleSwipe(1:bool disableSwipe)
+}
+
+const string BRIDGET_VERSION = "v8.3.1"

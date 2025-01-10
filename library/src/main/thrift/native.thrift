@@ -209,4 +209,4 @@ service Interaction {
     void disableArticleSwipe(1:bool disableSwipe)
 }
 
-const string BRIDGET_VERSION = "v8.3.0"
+const string BRIDGET_VERSION = "v8.3.1"

@@ -100,6 +100,7 @@ enum SignInScreenReferrer {
 
 service Environment {
     string nativeThriftPackageVersion()
+    string nativePlatform()
     bool isMyGuardianEnabled()
 }
 
@@ -209,4 +210,4 @@ service Interaction {
     void disableArticleSwipe(1:bool disableSwipe)
 }
 
-const string BRIDGET_VERSION = "v8.3.3"
+const string BRIDGET_VERSION = "v0.0.0-2025-05-28"

@@ -132,6 +132,12 @@ service Notifications {
     bool isFollowing(1:Topic topic),
 }
 
+service ListenToArticle {
+    bool shouldDisplayButton(1: string articleId)
+    bool playAudio(1: string articleId)
+    bool isPlayingAudio(1: string articleId)
+}
+
 service User {
     bool isPremium(),
     list<string> filterSeenArticles(1:list<string> articleIds),
@@ -217,4 +223,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.4.0"
+const string BRIDGET_VERSION = "0.0.0-2025-06-25-snapshot"

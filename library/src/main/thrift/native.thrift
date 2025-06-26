@@ -106,7 +106,6 @@ enum NativePlatform {
 service Environment {
     string nativeThriftPackageVersion()
     bool isMyGuardianEnabled()
-    bool isListenToArticleEnabled()
 }
 
 service Commercial {
@@ -225,4 +224,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.5.0"
+const string BRIDGET_VERSION = "v8.5.1"

@@ -134,6 +134,7 @@ service Notifications {
 
 service ListenToArticle {
     bool isAvailable(1: string articleId)
+    i32  getAudioDuration (1: string articleId)
     bool play(1: string articleId)
     bool isPlaying(1: string articleId)
     bool pause(1: string articleId)
@@ -224,4 +225,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.5.1"
+const string BRIDGET_VERSION = "v0.0.0-SNAPSHOT-2025-07-24"

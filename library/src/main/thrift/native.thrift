@@ -196,6 +196,11 @@ service Analytics {
     void sendTargetingParams(1:map<string, string> targetingParams)
 }
 
+service AbTesting {
+    //** returns a map of all native participations as 'test-id': 'variant-id' */
+    map<string, string> getParticipations()
+}
+
 service Navigation {
     void openPrivacySettings(),
     void openPrivacyPolicy()
@@ -225,4 +230,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.6.0"
+const string BRIDGET_VERSION = "v8.7.0"

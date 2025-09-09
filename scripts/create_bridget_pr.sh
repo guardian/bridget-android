@@ -6,13 +6,12 @@ CURRENT_VERSION="$(git describe --tags --abbrev=0)"
 BRANCH_NAME=update-bridget-classes-$CURRENT_VERSION
 
 # Commit & push new bridget jar
-#git config --global credential.helper "/bin/bash ./credential-helper.sh"
-git config --global user.name "GuardianAndroid"
-git config --global user.email "guardian.android@gmail.com"
+git config --global user.name "$GITHUB_USER_NAME"
+git config --global user.email "$GITHUB_USER_EMAIL"
 
 # Checkout app repo and create branch
 cd ..
-git clone https://GuardianAndroid:$GUARDIANANDROID_PAT@github.com/guardian/android-news-app.git
+git clone https://x-access-token:"$GITHUB_TOKEN"@github.com/guardian/android-news-app.git
 cd android-news-app
 git checkout -b $BRANCH_NAME
 
@@ -27,5 +26,5 @@ curl \
   -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/guardian/android-news-app/pulls \
-  -u GuardianAndroid:$GUARDIANANDROID_PAT \
+  -u x-access-token:"$GITHUB_TOKEN" \
   -d '{"head":"'$BRANCH_NAME'","base":"main", "title":"Update Bridget to version '$CURRENT_VERSION'", "body":"The Bridget models have been updated to version '$CURRENT_VERSION'. See [here](https://github.com/guardian/android-news-app/blob/main/bridget/README.md#how-to-update-bridget-version) how to review and merge this PR."}'

@@ -17,6 +17,8 @@ jobs:
       with:
         app-id: ${{ secrets.GU_ANDROID_CLIENT_ID }}
         private-key: ${{ secrets.GU_ANDROID_PRIVATE_KEY }}
+        owner: guardian
+        repositories: bridget-android, android-news-app
         permission-contents: write
         permission-pull-requests: write
 

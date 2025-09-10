@@ -3,7 +3,7 @@ name: Create PR in android-news-app when bridget is updated
 on:
   push:
     tags:
-      - "v[0-9]+.*.*"
+      - "v*"
 
 jobs:
   build:

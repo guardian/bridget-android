@@ -40,7 +40,7 @@ jobs:
         ./gradlew :library:build
 
     - name: Upload jar
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: library-jar
         path: |

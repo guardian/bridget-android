@@ -230,4 +230,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.7.3"
+const string BRIDGET_VERSION = "v0.0.0-2026-01-21"

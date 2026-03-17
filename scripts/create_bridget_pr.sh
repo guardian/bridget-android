@@ -18,7 +18,7 @@ git checkout -b $BRANCH_NAME
 # Copy jar
 mv -f ../bridget-android/library/build/libs/library.jar bridget/api/src/main/libs/bridget.jar
 
-git commit bridget/src/main/libs/bridget.jar -m "Update to bridget version $CURRENT_VERSION"
+git commit bridget/api/src/main/libs/bridget.jar -m "Update to bridget version $CURRENT_VERSION"
 git push origin $BRANCH_NAME
 
 # Create PR with latest jar commit

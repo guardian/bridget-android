@@ -9,6 +9,6 @@ package com.theguardian.bridget.thrift;
 @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
 public class $nativeConstants {
 
-  public static final java.lang.String BRIDGET_VERSION = "v8.7.6";
+  public static final java.lang.String BRIDGET_VERSION = "v0.0.0-2026-03-17";
 
 }

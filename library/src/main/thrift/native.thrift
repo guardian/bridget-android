@@ -140,6 +140,12 @@ service ListenToArticle {
     bool pause(1: string articleId)
 }
 
+service Audio {
+    bool isAvailable()
+    void play()
+    bool isPlaying()
+}
+
 service User {
     bool isPremium(),
     list<string> filterSeenArticles(1:list<string> articleIds),
@@ -234,4 +240,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.8.0"
+const string BRIDGET_VERSION = "v8.9.0"

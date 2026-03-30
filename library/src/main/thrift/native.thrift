@@ -140,6 +140,12 @@ service ListenToArticle {
     bool pause(1: string articleId)
 }
 
+service Audio {
+    bool isAvailable()
+    void play()
+    bool isPlaying()
+}
+
 service User {
     bool isPremium(),
     list<string> filterSeenArticles(1:list<string> articleIds),
@@ -168,6 +174,10 @@ service Videos {
      * On iOS, this method will always return false
      */
     bool setFullscreen(1:bool isFullscreen),
+    /*
+    * This method is used by the web layer to check if autoplaying videos are enabled in the in-app settings.
+    * */
+    bool isAutoplayEnabled()
 }
 
 service Metrics {
@@ -230,4 +240,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.7.6"
+const string BRIDGET_VERSION = "v8.9.0"

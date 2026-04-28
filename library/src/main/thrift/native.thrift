@@ -132,6 +132,15 @@ service Notifications {
     bool isFollowing(1:Topic topic),
 }
 
+struct MatchNotificationsAvailability {
+    1: required bool isAvailable;
+    2: optional string unavailableReason;
+}
+
+service MatchNotifications {
+    MatchNotificationsAvailability isAvailable(),
+}
+
 service ListenToArticle {
     bool isAvailable(1: string articleId)
     i32  getAudioDurationSeconds (1: string articleId)
@@ -240,4 +249,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.9.1"
+const string BRIDGET_VERSION = "v8.9.1-2026-04-28"

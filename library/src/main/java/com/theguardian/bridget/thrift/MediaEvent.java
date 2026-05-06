@@ -15,7 +15,13 @@ public enum MediaEvent implements org.apache.thrift.TEnum {
   percent25(3),
   percent50(4),
   percent75(5),
-  end(6);
+  end(6),
+  pause(7),
+  mute(8),
+  unmute(9),
+  enter_fullscreen(10),
+  exit_fullscreen(11),
+  view(12);
 
   private final int value;
 
@@ -52,6 +58,18 @@ public enum MediaEvent implements org.apache.thrift.TEnum {
         return percent75;
       case 6:
         return end;
+      case 7:
+        return pause;
+      case 8:
+        return mute;
+      case 9:
+        return unmute;
+      case 10:
+        return enter_fullscreen;
+      case 11:
+        return exit_fullscreen;
+      case 12:
+        return view;
       default:
         return null;
     }

@@ -69,12 +69,6 @@ enum MediaEvent {
     percent50 = 4,
     percent75 = 5,
     end = 6
-    pause = 7
-    mute = 8
-    unmute = 9
-    enter_fullscreen = 10
-    exit_fullscreen = 11
-    view = 12
 }
 
 struct VideoEvent {
@@ -136,6 +130,25 @@ service Notifications {
     bool follow(1:Topic topic),
     bool unfollow(1:Topic topic),
     bool isFollowing(1:Topic topic),
+}
+
+struct MatchNotificationsAvailability {
+    1: required bool isAvailable;
+    2: optional string unavailableReason;
+}
+
+struct FootballTeam {
+    1: required string id; // Team PA id
+    2: required string name; // Team name
+}
+
+struct FootballMatch {
+    1: required FootballTeam homeTeam;
+    2: required FootballTeam awayTeam;
+}
+
+service MatchNotifications {
+    MatchNotificationsAvailability isAvailable(1: FootballMatch footballMatch),
 }
 
 service ListenToArticle {
@@ -246,4 +259,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.9.2"
+const string BRIDGET_VERSION = "v8.9.2-2026-05-11"

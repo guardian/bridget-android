@@ -75,6 +75,7 @@ enum MediaEvent {
     enter_fullscreen = 10
     exit_fullscreen = 11
     view = 12
+    resume = 13
 }
 
 struct VideoEvent {
@@ -265,4 +266,4 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.10.0"
+const string BRIDGET_VERSION = "v8.11.0"

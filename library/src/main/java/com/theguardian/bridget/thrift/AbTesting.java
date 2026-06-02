@@ -847,15 +847,15 @@ public class AbTesting {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map94 = iprot.readMapBegin();
-                  struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map94.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _key95;
-                  @org.apache.thrift.annotation.Nullable java.lang.String _val96;
-                  for (int _i97 = 0; _i97 < _map94.size; ++_i97)
+                  org.apache.thrift.protocol.TMap _map104 = iprot.readMapBegin();
+                  struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map104.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key105;
+                  @org.apache.thrift.annotation.Nullable java.lang.String _val106;
+                  for (int _i107 = 0; _i107 < _map104.size; ++_i107)
                   {
-                    _key95 = iprot.readString();
-                    _val96 = iprot.readString();
-                    struct.success.put(_key95, _val96);
+                    _key105 = iprot.readString();
+                    _val106 = iprot.readString();
+                    struct.success.put(_key105, _val106);
                   }
                   iprot.readMapEnd();
                 }
@@ -884,10 +884,10 @@ public class AbTesting {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter98 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter108 : struct.success.entrySet())
             {
-              oprot.writeString(_iter98.getKey());
-              oprot.writeString(_iter98.getValue());
+              oprot.writeString(_iter108.getKey());
+              oprot.writeString(_iter108.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -919,10 +919,10 @@ public class AbTesting {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter99 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter109 : struct.success.entrySet())
             {
-              oprot.writeString(_iter99.getKey());
-              oprot.writeString(_iter99.getValue());
+              oprot.writeString(_iter109.getKey());
+              oprot.writeString(_iter109.getValue());
             }
           }
         }
@@ -934,15 +934,15 @@ public class AbTesting {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map100 = iprot.readMapBegin(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING); 
-            struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map100.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _key101;
-            @org.apache.thrift.annotation.Nullable java.lang.String _val102;
-            for (int _i103 = 0; _i103 < _map100.size; ++_i103)
+            org.apache.thrift.protocol.TMap _map110 = iprot.readMapBegin(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING); 
+            struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map110.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key111;
+            @org.apache.thrift.annotation.Nullable java.lang.String _val112;
+            for (int _i113 = 0; _i113 < _map110.size; ++_i113)
             {
-              _key101 = iprot.readString();
-              _val102 = iprot.readString();
-              struct.success.put(_key101, _val102);
+              _key111 = iprot.readString();
+              _val112 = iprot.readString();
+              struct.success.put(_key111, _val112);
             }
           }
           struct.setSuccessIsSet(true);

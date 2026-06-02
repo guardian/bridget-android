@@ -16,7 +16,20 @@ public class Videos {
 
     public void updateVideos(java.util.List<VideoSlot> videoSlots) throws org.apache.thrift.TException;
 
+    /**
+     * This method is used to submit media tracking events for videos from the web layer.
+     * 
+     * @param videoEvent
+     */
     public void sendVideoEvent(VideoEvent videoEvent) throws org.apache.thrift.TException;
+
+    /**
+     * This method is used to submit component attention time tracking updates for videos from the web layer.
+     * The argument is a map of videoIds to attention milliseconds, matching the native app tracking submission type.
+     * 
+     * @param componentAttentionMs
+     */
+    public void sendVideoAttentionTime(java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs) throws org.apache.thrift.TException;
 
     /**
      * This method is used by the web layer to instruct the native layer to activate or deactivate fullscreen mode
@@ -43,6 +56,8 @@ public class Videos {
     public void updateVideos(java.util.List<VideoSlot> videoSlots, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void sendVideoEvent(VideoEvent videoEvent, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+
+    public void sendVideoAttentionTime(java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void setFullscreen(boolean isFullscreen, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
 
@@ -132,6 +147,27 @@ public class Videos {
     {
       sendVideoEvent_result result = new sendVideoEvent_result();
       receiveBase(result, "sendVideoEvent");
+      return;
+    }
+
+    @Override
+    public void sendVideoAttentionTime(java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs) throws org.apache.thrift.TException
+    {
+      send_sendVideoAttentionTime(componentAttentionMs);
+      recv_sendVideoAttentionTime();
+    }
+
+    public void send_sendVideoAttentionTime(java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs) throws org.apache.thrift.TException
+    {
+      sendVideoAttentionTime_args args = new sendVideoAttentionTime_args();
+      args.setComponentAttentionMs(componentAttentionMs);
+      sendBase("sendVideoAttentionTime", args);
+    }
+
+    public void recv_sendVideoAttentionTime() throws org.apache.thrift.TException
+    {
+      sendVideoAttentionTime_result result = new sendVideoAttentionTime_result();
+      receiveBase(result, "sendVideoAttentionTime");
       return;
     }
 
@@ -310,6 +346,42 @@ public class Videos {
     }
 
     @Override
+    public void sendVideoAttentionTime(java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      sendVideoAttentionTime_call method_call = new sendVideoAttentionTime_call(componentAttentionMs, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class sendVideoAttentionTime_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs;
+      public sendVideoAttentionTime_call(java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.componentAttentionMs = componentAttentionMs;
+      }
+
+      @Override
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendVideoAttentionTime", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        sendVideoAttentionTime_args args = new sendVideoAttentionTime_args();
+        args.setComponentAttentionMs(componentAttentionMs);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      @Override
+      public Void getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_sendVideoAttentionTime();
+        return null;
+      }
+    }
+
+    @Override
     public void setFullscreen(boolean isFullscreen, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       setFullscreen_call method_call = new setFullscreen_call(isFullscreen, resultHandler, this, ___protocolFactory, ___transport);
@@ -392,6 +464,7 @@ public class Videos {
       processMap.put("insertVideos", new insertVideos());
       processMap.put("updateVideos", new updateVideos());
       processMap.put("sendVideoEvent", new sendVideoEvent());
+      processMap.put("sendVideoAttentionTime", new sendVideoAttentionTime());
       processMap.put("setFullscreen", new setFullscreen());
       processMap.put("isAutoplayEnabled", new isAutoplayEnabled());
       return processMap;
@@ -496,6 +569,39 @@ public class Videos {
       }
     }
 
+    public static class sendVideoAttentionTime<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendVideoAttentionTime_args, sendVideoAttentionTime_result> {
+      public sendVideoAttentionTime() {
+        super("sendVideoAttentionTime");
+      }
+
+      @Override
+      public sendVideoAttentionTime_args getEmptyArgsInstance() {
+        return new sendVideoAttentionTime_args();
+      }
+
+      @Override
+      public boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean rethrowUnhandledExceptions() {
+        return false;
+      }
+
+      @Override
+      public sendVideoAttentionTime_result getEmptyResultInstance() {
+        return new sendVideoAttentionTime_result();
+      }
+
+      @Override
+      public sendVideoAttentionTime_result getResult(I iface, sendVideoAttentionTime_args args) throws org.apache.thrift.TException {
+        sendVideoAttentionTime_result result = getEmptyResultInstance();
+        iface.sendVideoAttentionTime(args.componentAttentionMs);
+        return result;
+      }
+    }
+
     public static class setFullscreen<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setFullscreen_args, setFullscreen_result> {
       public setFullscreen() {
         super("setFullscreen");
@@ -580,6 +686,7 @@ public class Videos {
       processMap.put("insertVideos", new insertVideos());
       processMap.put("updateVideos", new updateVideos());
       processMap.put("sendVideoEvent", new sendVideoEvent());
+      processMap.put("sendVideoAttentionTime", new sendVideoAttentionTime());
       processMap.put("setFullscreen", new setFullscreen());
       processMap.put("isAutoplayEnabled", new isAutoplayEnabled());
       return processMap;
@@ -795,6 +902,77 @@ public class Videos {
       @Override
       public void start(I iface, sendVideoEvent_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
         iface.sendVideoEvent(args.videoEvent,resultHandler);
+      }
+    }
+
+    public static class sendVideoAttentionTime<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, sendVideoAttentionTime_args, Void, sendVideoAttentionTime_result> {
+      public sendVideoAttentionTime() {
+        super("sendVideoAttentionTime");
+      }
+
+      @Override
+      public sendVideoAttentionTime_result getEmptyResultInstance() {
+        return new sendVideoAttentionTime_result();
+      }
+
+      @Override
+      public sendVideoAttentionTime_args getEmptyArgsInstance() {
+        return new sendVideoAttentionTime_args();
+      }
+
+      @Override
+      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+          @Override
+          public void onComplete(Void o) {
+            sendVideoAttentionTime_result result = new sendVideoAttentionTime_result();
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          @Override
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            sendVideoAttentionTime_result result = new sendVideoAttentionTime_result();
+            if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      @Override
+      public boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      public void start(I iface, sendVideoAttentionTime_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.sendVideoAttentionTime(args.componentAttentionMs,resultHandler);
       }
     }
 
@@ -2984,6 +3162,702 @@ public class Videos {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, sendVideoEvent_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
+  public static class sendVideoAttentionTime_args implements org.apache.thrift.TBase<sendVideoAttentionTime_args, sendVideoAttentionTime_args._Fields>, java.io.Serializable, Cloneable, Comparable<sendVideoAttentionTime_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendVideoAttentionTime_args");
+
+    private static final org.apache.thrift.protocol.TField COMPONENT_ATTENTION_MS_FIELD_DESC = new org.apache.thrift.protocol.TField("componentAttentionMs", org.apache.thrift.protocol.TType.MAP, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new sendVideoAttentionTime_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new sendVideoAttentionTime_argsTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      COMPONENT_ATTENTION_MS((short)1, "componentAttentionMs");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // COMPONENT_ATTENTION_MS
+            return COMPONENT_ATTENTION_MS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      @Override
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      @Override
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.COMPONENT_ATTENTION_MS, new org.apache.thrift.meta_data.FieldMetaData("componentAttentionMs", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64))));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendVideoAttentionTime_args.class, metaDataMap);
+    }
+
+    public sendVideoAttentionTime_args() {
+    }
+
+    public sendVideoAttentionTime_args(
+      java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs)
+    {
+      this();
+      this.componentAttentionMs = componentAttentionMs;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public sendVideoAttentionTime_args(sendVideoAttentionTime_args other) {
+      if (other.isSetComponentAttentionMs()) {
+        java.util.Map<java.lang.String,java.lang.Long> __this__componentAttentionMs = new java.util.HashMap<java.lang.String,java.lang.Long>(other.componentAttentionMs);
+        this.componentAttentionMs = __this__componentAttentionMs;
+      }
+    }
+
+    @Override
+    public sendVideoAttentionTime_args deepCopy() {
+      return new sendVideoAttentionTime_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.componentAttentionMs = null;
+    }
+
+    public int getComponentAttentionMsSize() {
+      return (this.componentAttentionMs == null) ? 0 : this.componentAttentionMs.size();
+    }
+
+    public void putToComponentAttentionMs(java.lang.String key, long val) {
+      if (this.componentAttentionMs == null) {
+        this.componentAttentionMs = new java.util.HashMap<java.lang.String,java.lang.Long>();
+      }
+      this.componentAttentionMs.put(key, val);
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.util.Map<java.lang.String,java.lang.Long> getComponentAttentionMs() {
+      return this.componentAttentionMs;
+    }
+
+    public sendVideoAttentionTime_args setComponentAttentionMs(@org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.lang.Long> componentAttentionMs) {
+      this.componentAttentionMs = componentAttentionMs;
+      return this;
+    }
+
+    public void unsetComponentAttentionMs() {
+      this.componentAttentionMs = null;
+    }
+
+    /** Returns true if field componentAttentionMs is set (has been assigned a value) and false otherwise */
+    public boolean isSetComponentAttentionMs() {
+      return this.componentAttentionMs != null;
+    }
+
+    public void setComponentAttentionMsIsSet(boolean value) {
+      if (!value) {
+        this.componentAttentionMs = null;
+      }
+    }
+
+    @Override
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case COMPONENT_ATTENTION_MS:
+        if (value == null) {
+          unsetComponentAttentionMs();
+        } else {
+          setComponentAttentionMs((java.util.Map<java.lang.String,java.lang.Long>)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case COMPONENT_ATTENTION_MS:
+        return getComponentAttentionMs();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    @Override
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case COMPONENT_ATTENTION_MS:
+        return isSetComponentAttentionMs();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that instanceof sendVideoAttentionTime_args)
+        return this.equals((sendVideoAttentionTime_args)that);
+      return false;
+    }
+
+    public boolean equals(sendVideoAttentionTime_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_componentAttentionMs = true && this.isSetComponentAttentionMs();
+      boolean that_present_componentAttentionMs = true && that.isSetComponentAttentionMs();
+      if (this_present_componentAttentionMs || that_present_componentAttentionMs) {
+        if (!(this_present_componentAttentionMs && that_present_componentAttentionMs))
+          return false;
+        if (!this.componentAttentionMs.equals(that.componentAttentionMs))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetComponentAttentionMs()) ? 131071 : 524287);
+      if (isSetComponentAttentionMs())
+        hashCode = hashCode * 8191 + componentAttentionMs.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(sendVideoAttentionTime_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.compare(isSetComponentAttentionMs(), other.isSetComponentAttentionMs());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetComponentAttentionMs()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.componentAttentionMs, other.componentAttentionMs);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    @Override
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    @Override
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("sendVideoAttentionTime_args(");
+      boolean first = true;
+
+      sb.append("componentAttentionMs:");
+      if (this.componentAttentionMs == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.componentAttentionMs);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class sendVideoAttentionTime_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendVideoAttentionTime_argsStandardScheme getScheme() {
+        return new sendVideoAttentionTime_argsStandardScheme();
+      }
+    }
+
+    private static class sendVideoAttentionTime_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<sendVideoAttentionTime_args> {
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol iprot, sendVideoAttentionTime_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // COMPONENT_ATTENTION_MS
+              if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+                {
+                  org.apache.thrift.protocol.TMap _map76 = iprot.readMapBegin();
+                  struct.componentAttentionMs = new java.util.HashMap<java.lang.String,java.lang.Long>(2*_map76.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key77;
+                  long _val78;
+                  for (int _i79 = 0; _i79 < _map76.size; ++_i79)
+                  {
+                    _key77 = iprot.readString();
+                    _val78 = iprot.readI64();
+                    struct.componentAttentionMs.put(_key77, _val78);
+                  }
+                  iprot.readMapEnd();
+                }
+                struct.setComponentAttentionMsIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol oprot, sendVideoAttentionTime_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.componentAttentionMs != null) {
+          oprot.writeFieldBegin(COMPONENT_ATTENTION_MS_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.I64, struct.componentAttentionMs.size()));
+            for (java.util.Map.Entry<java.lang.String, java.lang.Long> _iter80 : struct.componentAttentionMs.entrySet())
+            {
+              oprot.writeString(_iter80.getKey());
+              oprot.writeI64(_iter80.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class sendVideoAttentionTime_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendVideoAttentionTime_argsTupleScheme getScheme() {
+        return new sendVideoAttentionTime_argsTupleScheme();
+      }
+    }
+
+    private static class sendVideoAttentionTime_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<sendVideoAttentionTime_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, sendVideoAttentionTime_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetComponentAttentionMs()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetComponentAttentionMs()) {
+          {
+            oprot.writeI32(struct.componentAttentionMs.size());
+            for (java.util.Map.Entry<java.lang.String, java.lang.Long> _iter81 : struct.componentAttentionMs.entrySet())
+            {
+              oprot.writeString(_iter81.getKey());
+              oprot.writeI64(_iter81.getValue());
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, sendVideoAttentionTime_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          {
+            org.apache.thrift.protocol.TMap _map82 = iprot.readMapBegin(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.I64); 
+            struct.componentAttentionMs = new java.util.HashMap<java.lang.String,java.lang.Long>(2*_map82.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key83;
+            long _val84;
+            for (int _i85 = 0; _i85 < _map82.size; ++_i85)
+            {
+              _key83 = iprot.readString();
+              _val84 = iprot.readI64();
+              struct.componentAttentionMs.put(_key83, _val84);
+            }
+          }
+          struct.setComponentAttentionMsIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
+  public static class sendVideoAttentionTime_result implements org.apache.thrift.TBase<sendVideoAttentionTime_result, sendVideoAttentionTime_result._Fields>, java.io.Serializable, Cloneable, Comparable<sendVideoAttentionTime_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendVideoAttentionTime_result");
+
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new sendVideoAttentionTime_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new sendVideoAttentionTime_resultTupleSchemeFactory();
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      @Override
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      @Override
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendVideoAttentionTime_result.class, metaDataMap);
+    }
+
+    public sendVideoAttentionTime_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public sendVideoAttentionTime_result(sendVideoAttentionTime_result other) {
+    }
+
+    @Override
+    public sendVideoAttentionTime_result deepCopy() {
+      return new sendVideoAttentionTime_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    @Override
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    @Override
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that instanceof sendVideoAttentionTime_result)
+        return this.equals((sendVideoAttentionTime_result)that);
+      return false;
+    }
+
+    public boolean equals(sendVideoAttentionTime_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(sendVideoAttentionTime_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    @Override
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    @Override
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("sendVideoAttentionTime_result(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class sendVideoAttentionTime_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendVideoAttentionTime_resultStandardScheme getScheme() {
+        return new sendVideoAttentionTime_resultStandardScheme();
+      }
+    }
+
+    private static class sendVideoAttentionTime_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<sendVideoAttentionTime_result> {
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol iprot, sendVideoAttentionTime_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol oprot, sendVideoAttentionTime_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class sendVideoAttentionTime_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      @Override
+      public sendVideoAttentionTime_resultTupleScheme getScheme() {
+        return new sendVideoAttentionTime_resultTupleScheme();
+      }
+    }
+
+    private static class sendVideoAttentionTime_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<sendVideoAttentionTime_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, sendVideoAttentionTime_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, sendVideoAttentionTime_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       }
     }

@@ -274,4 +274,17 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.12.0"
+
+service LiveActivities {
+    /*
+    * for the following methods:
+    * activityType is required and must be "football-match". If this service was extended, this could be a different value.
+    * activityId is an id identifying the activity, depending on the type.
+    *   for "football-match", it is the PA MatchID
+    */
+    bool isAvailable(1: string activityType, 2: string activityId)
+    bool follow(1: string activityType, 2: string activityId)
+    bool unfollow(1: string activityType, 2: string activityId)
+    bool isFollowing(1: string activityType, 2: string activityId)
+}
+const string BRIDGET_VERSION = "v8.13.0"

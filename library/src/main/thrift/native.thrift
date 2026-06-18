@@ -188,7 +188,15 @@ service Gallery {
 service Videos {
     void insertVideos(1:list<VideoSlot> videoSlots),
     void updateVideos(1:list<VideoSlot> videoSlots),
+    /**
+    * This method is used to submit media tracking events for videos from the web layer.
+    */
     void sendVideoEvent(1:VideoEvent videoEvent),
+    /**
+    * This method is used to submit component attention time tracking updates for videos from the web layer.
+    * The argument is a map of videoIds to attention milliseconds, matching the native app tracking submission type.
+    */
+    void sendVideoAttentionTimes(1:map<string, i64> componentAttentionMs),
     /**
      * This method is used by the web layer to instruct the native layer to activate or deactivate fullscreen mode
      * This is currently only required for Android as the fullscreen control on the YouTube player in Android webviews is a no-op
@@ -266,4 +274,17 @@ service Interaction {
 service Interactives {
     NativePlatform getNativePlatform(),
 }
-const string BRIDGET_VERSION = "v8.11.0"
+
+service LiveActivities {
+    /*
+    * for the following methods:
+    * activityType is required and must be "football-match". If this service was extended, this could be a different value.
+    * activityId is an id identifying the activity, depending on the type.
+    *   for "football-match", it is the PA MatchID
+    */
+    bool isAvailable(1: string activityType, 2: string activityId)
+    bool follow(1: string activityType, 2: string activityId)
+    bool unfollow(1: string activityType, 2: string activityId)
+    bool isFollowing(1: string activityType, 2: string activityId)
+}
+const string BRIDGET_VERSION = "v8.13.1"

@@ -257,9 +257,11 @@ service Navigation {
  *  - requestSignUp: request to sign up to a newsletter using an email address entered by the user.
  * Returns `true` if the request was successful, `false` if it failed for any reason. Exceptions
  * thrown will be discarded.
+ * - getLoggedInUserEmail: request currently signed in users email address. Blank if not signed in.
  */
 service Newsletters {
-    bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName)
+    bool requestSignUp(1: string emailAddress, 2:string newsletterIdentityName),
+    string getLoggedInUserEmail()
 }
 
 service Interaction {
@@ -287,4 +289,5 @@ service LiveActivities {
     bool unfollow(1: string activityType, 2: string activityId)
     bool isFollowing(1: string activityType, 2: string activityId)
 }
-const string BRIDGET_VERSION = "v8.13.1"
+
+const string BRIDGET_VERSION = "v8.14.0-2026-06-25-1"

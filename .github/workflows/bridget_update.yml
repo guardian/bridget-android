@@ -11,7 +11,7 @@ jobs:
     runs-on: 4core-ubuntu-latest
     timeout-minutes: 30
     steps:
-    - uses: actions/create-github-app-token@v2
+    - uses: actions/create-github-app-token@v3
       id: app-token
       with:
         app-id: ${{ secrets.GU_ANDROID_CLIENT_ID }}
@@ -21,7 +21,7 @@ jobs:
         permission-contents: write
         permission-pull-requests: write
 
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         # Needed so that app's token is used to authorise git ops in 'Add jar to android-news-app repo' step
         token: ${{ steps.app-token.outputs.token }}
@@ -33,7 +33,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
+      uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5.0.2
 
     - name: Build jar
       run: |

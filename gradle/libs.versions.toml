@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.3.21"
+kotlin = "2.4.10"
 thrift = "0.24.0"
 httpclient = "4.5.14"
 slf4j = "2.0.18"

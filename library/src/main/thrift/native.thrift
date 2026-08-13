@@ -287,4 +287,4 @@ service LiveActivities {
     bool unfollow(1: string activityType, 2: string activityId)
     bool isFollowing(1: string activityType, 2: string activityId)
 }
-const string BRIDGET_VERSION = "v8.13.1"
+const string BRIDGET_VERSION = "v8.13.2"

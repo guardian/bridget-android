@@ -294,4 +294,4 @@ service LiveActivities {
     bool isFollowing(1: string activityType, 2: string activityId)
 }
 
-const string BRIDGET_VERSION = "v8.14.0"
+const string BRIDGET_VERSION = "v8.14.1-2026-10-28-1"
